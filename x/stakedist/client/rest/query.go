@@ -9,7 +9,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/client/context"
 	"github.com/cosmos/cosmos-sdk/types/rest"
 
-	"github.com/lcnem/jpyx/x/stakedist/types"
+	"github.com/lcnem/eurx/x/stakedist/types"
 )
 
 func registerQueryRoutes(cliCtx context.CLIContext, r *mux.Router) {

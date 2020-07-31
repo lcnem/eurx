@@ -11,7 +11,7 @@ import (
 
 const (
 	TestInitiatorModuleName = "liquidator"
-	TestLotDenom            = "jpyx"
+	TestLotDenom            = "eurx"
 	TestLotAmount           = 100
 	TestBidDenom            = "stake"
 	TestBidAmount           = 20
@@ -20,12 +20,12 @@ const (
 	TestDebtAmount2         = 15
 	TestExtraEndTime        = 10000
 	TestAuctionID           = 9999123
-	testAccAddress1         = "jpyx1qcfdf69js922qrdr4yaww3ax7gjml6pd39p8lj"
-	testAccAddress2         = "jpyx1pdfav2cjhry9k79nu6r8kgknnjtq6a7rcr0qlr"
+	testAccAddress1         = "eurx1qcfdf69js922qrdr4yaww3ax7gjml6pd39p8lj"
+	testAccAddress2         = "eurx1pdfav2cjhry9k79nu6r8kgknnjtq6a7rcr0qlr"
 )
 
 func init() {
-	sdk.GetConfig().SetBech32PrefixForAccount("jpyx", "jpyx"+sdk.PrefixPublic)
+	sdk.GetConfig().SetBech32PrefixForAccount("eurx", "eurx"+sdk.PrefixPublic)
 }
 
 func d(amount string) sdk.Dec               { return sdk.MustNewDecFromStr(amount) }

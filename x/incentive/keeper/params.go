@@ -3,7 +3,7 @@ package keeper
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/lcnem/jpyx/x/incentive/types"
+	"github.com/lcnem/eurx/x/incentive/types"
 )
 
 // GetParams returns the params from the store

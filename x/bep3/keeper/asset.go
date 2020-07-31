@@ -4,7 +4,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
-	"github.com/lcnem/jpyx/x/bep3/types"
+	"github.com/lcnem/eurx/x/bep3/types"
 )
 
 // IncrementCurrentAssetSupply increments an asset's supply by the coin

@@ -7,15 +7,15 @@ import (
 
 	tmtime "github.com/tendermint/tendermint/types/time"
 
-	"github.com/lcnem/jpyx/app"
-	"github.com/lcnem/jpyx/x/bep3"
+	"github.com/lcnem/eurx/app"
+	"github.com/lcnem/eurx/x/bep3"
 )
 
 const (
 	TestSenderOtherChain    = "bnb1uky3me9ggqypmrsvxk7ur6hqkzq7zmv4ed4ng7"
 	TestRecipientOtherChain = "bnb1urfermcg92dwq36572cx4xg84wpk3lfpksr5g7"
-	TestDeputy              = "jpyx1xy7hrjy9r0algz9w3gzm8u6mrpq97kwta747gj"
-	TestUser                = "jpyx1vry5lhegzlulehuutcr7nmdlmktw88awp0a39p"
+	TestDeputy              = "eurx1xy7hrjy9r0algz9w3gzm8u6mrpq97kwta747gj"
+	TestUser                = "eurx1vry5lhegzlulehuutcr7nmdlmktw88awp0a39p"
 )
 
 var (

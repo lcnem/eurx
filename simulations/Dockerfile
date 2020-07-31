@@ -11,7 +11,7 @@ RUN apk add python py-pip
 RUN pip install awscli
 
 # Set working directory for the build
-WORKDIR /root/jpyx
+WORKDIR /root/eurx
 # default home directory is /root
 
 COPY go.mod .

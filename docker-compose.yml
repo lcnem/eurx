@@ -1,9 +1,9 @@
 version: '3'
 
 services:
-  jpyxdnode0:
-    container_name: jpyxdnode0
-    image: "lcnem/jpyxnode"
+  eurxdnode0:
+    container_name: eurxdnode0
+    image: "lcnem/eurxnode"
     ports:
       - "26656-26657:26656-26657"
     environment:
@@ -15,9 +15,9 @@ services:
       localnet:
         ipv4_address: 192.168.10.2
 
-  jpyxdnode1:
-    container_name: jpyxdnode1
-    image: "lcnem/jpyxnode"
+  eurxdnode1:
+    container_name: eurxdnode1
+    image: "lcnem/eurxnode"
     ports:
       - "26659-26660:26656-26657"
     environment:
@@ -29,9 +29,9 @@ services:
       localnet:
         ipv4_address: 192.168.10.3
 
-  jpyxdnode2:
-    container_name: jpyxdnode2
-    image: "lcnem/jpyxnode"
+  eurxdnode2:
+    container_name: eurxdnode2
+    image: "lcnem/eurxnode"
     environment:
       - ID=2
       - LOG=${LOG:-kvd.log}
@@ -43,9 +43,9 @@ services:
       localnet:
         ipv4_address: 192.168.10.4
 
-  jpyxdnode3:
-    container_name: jpyxdnode3
-    image: "lcnem/jpyxnode"
+  eurxdnode3:
+    container_name: eurxdnode3
+    image: "lcnem/eurxnode"
     environment:
       - ID=3
       - LOG=${LOG:-kvd.log}

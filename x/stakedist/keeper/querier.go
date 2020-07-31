@@ -7,7 +7,7 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/lcnem/jpyx/x/stakedist/types"
+	"github.com/lcnem/eurx/x/stakedist/types"
 )
 
 // NewQuerier is the module level router for state queries

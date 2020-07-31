@@ -16,10 +16,10 @@ import (
 	abci "github.com/tendermint/tendermint/abci/types"
 	tmtime "github.com/tendermint/tendermint/types/time"
 
-	"github.com/lcnem/jpyx/app"
-	"github.com/lcnem/jpyx/x/auction/keeper"
-	"github.com/lcnem/jpyx/x/auction/types"
-	"github.com/lcnem/jpyx/x/cdp"
+	"github.com/lcnem/eurx/app"
+	"github.com/lcnem/eurx/x/auction/keeper"
+	"github.com/lcnem/eurx/x/auction/types"
+	"github.com/lcnem/eurx/x/cdp"
 )
 
 const (

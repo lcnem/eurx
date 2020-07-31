@@ -10,8 +10,8 @@ import (
 	govtypes "github.com/cosmos/cosmos-sdk/x/gov/types"
 	paramstypes "github.com/cosmos/cosmos-sdk/x/params/types"
 
-	"github.com/lcnem/jpyx/app"
-	"github.com/lcnem/jpyx/x/committee/types"
+	"github.com/lcnem/eurx/app"
+	"github.com/lcnem/eurx/x/committee/types"
 )
 
 type TypesTestSuite struct {
@@ -43,7 +43,7 @@ func (suite *TypesTestSuite) TestCommittee_HasPermissionsFor() {
 						Subspace: "cdp",
 						Key:      "DebtThreshold",
 
-						Value: `{"denom": "jpyx", "amount": "1000000"}`,
+						Value: `{"denom": "eurx", "amount": "1000000"}`,
 					},
 				},
 			),
@@ -134,7 +134,7 @@ func (suite *TypesTestSuite) TestCommittee_HasPermissionsFor() {
 						Subspace: "cdp",
 						Key:      "DebtThreshold",
 
-						Value: `{"denom": "jpyx", "amount": "1000000"}`,
+						Value: `{"denom": "eurx", "amount": "1000000"}`,
 					},
 					{
 						Subspace: "cdp",

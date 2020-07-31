@@ -33,25 +33,25 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/upgrade"
 	upgradeclient "github.com/cosmos/cosmos-sdk/x/upgrade/client"
 
-	"github.com/lcnem/jpyx/x/auction"
-	"github.com/lcnem/jpyx/x/bep3"
-	"github.com/lcnem/jpyx/x/cdp"
-	"github.com/lcnem/jpyx/x/committee"
-	"github.com/lcnem/jpyx/x/incentive"
-	"github.com/lcnem/jpyx/x/pricefeed"
-	stakedist "github.com/lcnem/jpyx/x/stakedist"
-	validatorvesting "github.com/lcnem/jpyx/x/validator-vesting"
+	"github.com/lcnem/eurx/x/auction"
+	"github.com/lcnem/eurx/x/bep3"
+	"github.com/lcnem/eurx/x/cdp"
+	"github.com/lcnem/eurx/x/committee"
+	"github.com/lcnem/eurx/x/incentive"
+	"github.com/lcnem/eurx/x/pricefeed"
+	stakedist "github.com/lcnem/eurx/x/stakedist"
+	validatorvesting "github.com/lcnem/eurx/x/validator-vesting"
 )
 
 const (
-	appName          = "jpyx"
-	Bech32MainPrefix = "jpyx"
+	appName          = "eurx"
+	Bech32MainPrefix = "eurx"
 )
 
 var (
 	// default home directories for expected binaries
-	DefaultCLIHome  = os.ExpandEnv("$HOME/.jpyxcli")
-	DefaultNodeHome = os.ExpandEnv("$HOME/.jpyxd")
+	DefaultCLIHome  = os.ExpandEnv("$HOME/.eurxcli")
+	DefaultNodeHome = os.ExpandEnv("$HOME/.eurxd")
 
 	// ModuleBasics manages simple versions of full app modules. It's used for things such as codec registration and genesis file verification.
 	ModuleBasics = module.NewBasicManager(

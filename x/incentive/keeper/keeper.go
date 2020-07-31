@@ -8,7 +8,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/params/subspace"
 
-	"github.com/lcnem/jpyx/x/incentive/types"
+	"github.com/lcnem/eurx/x/incentive/types"
 )
 
 // Keeper keeper for the incentive module

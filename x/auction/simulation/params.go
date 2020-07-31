@@ -6,7 +6,7 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 
-	"github.com/lcnem/jpyx/x/auction/types"
+	"github.com/lcnem/eurx/x/auction/types"
 )
 
 // ParamChanges defines the parameters that can be modified by param change proposals

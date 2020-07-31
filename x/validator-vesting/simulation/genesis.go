@@ -12,7 +12,7 @@ import (
 	vestingtypes "github.com/cosmos/cosmos-sdk/x/auth/vesting/types"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 
-	"github.com/lcnem/jpyx/x/validator-vesting/types"
+	"github.com/lcnem/eurx/x/validator-vesting/types"
 )
 
 // RandomizedGenState generates a random GenesisState for validator-vesting

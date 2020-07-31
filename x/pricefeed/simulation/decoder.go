@@ -8,7 +8,7 @@ import (
 
 	"github.com/tendermint/tendermint/libs/kv"
 
-	"github.com/lcnem/jpyx/x/pricefeed/types"
+	"github.com/lcnem/eurx/x/pricefeed/types"
 )
 
 // DecodeStore unmarshals the KVPair's Value to the corresponding pricefeed type

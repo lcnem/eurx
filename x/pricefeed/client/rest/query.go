@@ -9,7 +9,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/client/context"
 	"github.com/cosmos/cosmos-sdk/types/rest"
 
-	"github.com/lcnem/jpyx/x/pricefeed/types"
+	"github.com/lcnem/eurx/x/pricefeed/types"
 )
 
 // define routes that get registered by the main application

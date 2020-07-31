@@ -8,7 +8,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/lcnem/jpyx/x/stakedist/types"
+	"github.com/lcnem/eurx/x/stakedist/types"
 )
 
 type paramTest struct {

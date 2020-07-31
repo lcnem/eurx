@@ -10,13 +10,13 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 
-	appparams "github.com/lcnem/jpyx/app/params"
-	"github.com/lcnem/jpyx/x/bep3/keeper"
-	"github.com/lcnem/jpyx/x/bep3/types"
+	appparams "github.com/lcnem/eurx/app/params"
+	"github.com/lcnem/eurx/x/bep3/keeper"
+	"github.com/lcnem/eurx/x/bep3/types"
 )
 
 var (
-	noOpMsg = simulation.NoOpMsg(types.ModuleName)
+	noOpMsg      = simulation.NoOpMsg(types.ModuleName)
 	randomNumber = []byte{114, 21, 74, 180, 81, 92, 21, 91, 173, 164, 143, 111, 120, 58, 241, 58, 40, 22, 59, 133, 102, 233, 55, 149, 12, 199, 231, 63, 122, 23, 88, 9}
 )
 

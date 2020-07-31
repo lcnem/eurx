@@ -11,9 +11,9 @@ import (
 	abci "github.com/tendermint/tendermint/abci/types"
 	tmtime "github.com/tendermint/tendermint/types/time"
 
-	"github.com/lcnem/jpyx/app"
-	"github.com/lcnem/jpyx/x/stakedist/keeper"
-	"github.com/lcnem/jpyx/x/stakedist/types"
+	"github.com/lcnem/eurx/app"
+	"github.com/lcnem/eurx/x/stakedist/keeper"
+	"github.com/lcnem/eurx/x/stakedist/types"
 )
 
 type KeeperTestSuite struct {

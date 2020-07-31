@@ -15,10 +15,10 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/lcnem/jpyx/x/cdp/client/cli"
-	"github.com/lcnem/jpyx/x/cdp/client/rest"
-	"github.com/lcnem/jpyx/x/cdp/simulation"
-	"github.com/lcnem/jpyx/x/cdp/types"
+	"github.com/lcnem/eurx/x/cdp/client/cli"
+	"github.com/lcnem/eurx/x/cdp/client/rest"
+	"github.com/lcnem/eurx/x/cdp/simulation"
+	"github.com/lcnem/eurx/x/cdp/types"
 )
 
 var (

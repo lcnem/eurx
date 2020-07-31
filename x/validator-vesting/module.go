@@ -15,10 +15,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	sim "github.com/cosmos/cosmos-sdk/x/simulation"
 
-	"github.com/lcnem/jpyx/x/validator-vesting/client/cli"
-	"github.com/lcnem/jpyx/x/validator-vesting/client/rest"
-	"github.com/lcnem/jpyx/x/validator-vesting/simulation"
-	"github.com/lcnem/jpyx/x/validator-vesting/types"
+	"github.com/lcnem/eurx/x/validator-vesting/client/cli"
+	"github.com/lcnem/eurx/x/validator-vesting/client/rest"
+	"github.com/lcnem/eurx/x/validator-vesting/simulation"
+	"github.com/lcnem/eurx/x/validator-vesting/types"
 )
 
 var (

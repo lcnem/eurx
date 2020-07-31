@@ -11,9 +11,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/auth"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 
-	appparams "github.com/lcnem/jpyx/app/params"
-	"github.com/lcnem/jpyx/x/pricefeed/keeper"
-	"github.com/lcnem/jpyx/x/pricefeed/types"
+	appparams "github.com/lcnem/eurx/app/params"
+	"github.com/lcnem/eurx/x/pricefeed/keeper"
+	"github.com/lcnem/eurx/x/pricefeed/types"
 )
 
 // Simulation operation weights constants
@@ -46,9 +46,9 @@ func WeightedOperations(
 func SimulateMsgUpdatePrices(ak auth.AccountKeeper, keeper keeper.Keeper, blocks int) simulation.Operation {
 	// runs one at the start of each simulation
 	startingPrices := map[string]sdk.Dec{
-		"btc:jpy": sdk.MustNewDecFromStr("7000"),
-		"bnb:jpy": sdk.MustNewDecFromStr("15"),
-		"xrp:jpy": sdk.MustNewDecFromStr("0.25"),
+		"btc:eur": sdk.MustNewDecFromStr("7000"),
+		"bnb:eur": sdk.MustNewDecFromStr("15"),
+		"xrp:eur": sdk.MustNewDecFromStr("0.25"),
 	}
 
 	// creates the new price generator from starting prices - resets for each sim

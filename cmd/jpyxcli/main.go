@@ -24,7 +24,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/bank"
 	bankcmd "github.com/cosmos/cosmos-sdk/x/bank/client/cli"
 
-	"github.com/lcnem/jpyx/app"
+	"github.com/lcnem/eurx/app"
 )
 
 func main() {
@@ -45,8 +45,8 @@ func main() {
 	// with the cdc
 
 	rootCmd := &cobra.Command{
-		Use:   "jpyxcli",
-		Short: "Command line interface for interacting with jpyxd",
+		Use:   "eurxcli",
+		Short: "Command line interface for interacting with eurxd",
 	}
 
 	// Add --chain-id to persistent flags and mark it required
@@ -70,8 +70,8 @@ func main() {
 		flags.NewCompletionCmd(rootCmd, true),
 	)
 
-	// Add flags and prefix all env exposed with JPY
-	executor := cli.PrepareMainCmd(rootCmd, "JPY", app.DefaultCLIHome)
+	// Add flags and prefix all env exposed with EUR
+	executor := cli.PrepareMainCmd(rootCmd, "EUR", app.DefaultCLIHome)
 
 	err := executor.Execute()
 	if err != nil {

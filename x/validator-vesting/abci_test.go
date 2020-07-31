@@ -14,8 +14,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/staking"
 	stakingexported "github.com/cosmos/cosmos-sdk/x/staking/exported"
 
-	"github.com/lcnem/jpyx/x/validator-vesting/keeper"
-	"github.com/lcnem/jpyx/x/validator-vesting/types"
+	"github.com/lcnem/eurx/x/validator-vesting/keeper"
+	"github.com/lcnem/eurx/x/validator-vesting/types"
 )
 
 func TestBeginBlockerZeroHeight(t *testing.T) {

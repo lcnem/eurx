@@ -14,7 +14,7 @@ import (
 	"github.com/tendermint/tendermint/crypto/ed25519"
 	"github.com/tendermint/tendermint/libs/kv"
 
-	"github.com/lcnem/jpyx/x/validator-vesting/types"
+	"github.com/lcnem/eurx/x/validator-vesting/types"
 )
 
 var (

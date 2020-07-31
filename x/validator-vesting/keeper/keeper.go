@@ -10,7 +10,7 @@ import (
 
 	"github.com/tendermint/tendermint/libs/log"
 
-	"github.com/lcnem/jpyx/x/validator-vesting/types"
+	"github.com/lcnem/eurx/x/validator-vesting/types"
 )
 
 // Keeper of the validatorvesting store

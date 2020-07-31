@@ -7,7 +7,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/lcnem/jpyx/x/cdp/simulation"
+	"github.com/lcnem/eurx/x/cdp/simulation"
 )
 
 func TestShiftDec(t *testing.T) {

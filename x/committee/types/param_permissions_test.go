@@ -2,9 +2,9 @@ package types
 
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	bep3types "github.com/lcnem/jpyx/x/bep3/types"
-	cdptypes "github.com/lcnem/jpyx/x/cdp/types"
-	pricefeedtypes "github.com/lcnem/jpyx/x/pricefeed/types"
+	bep3types "github.com/lcnem/eurx/x/bep3/types"
+	cdptypes "github.com/lcnem/eurx/x/cdp/types"
+	pricefeedtypes "github.com/lcnem/eurx/x/pricefeed/types"
 )
 
 // Avoid cluttering test cases with long function names
@@ -18,38 +18,38 @@ func (suite *PermissionsTestSuite) TestAllowedCollateralParams_Allows() {
 		{
 			Denom:               "bnb",
 			LiquidationRatio:    d("2.0"),
-			DebtLimit:           c("jpyx", 1000000000000),
+			DebtLimit:           c("eurx", 1000000000000),
 			StabilityFee:        d("1.000000001547125958"),
 			LiquidationPenalty:  d("0.05"),
 			AuctionSize:         i(100),
 			Prefix:              0x20,
 			ConversionFactor:    i(6),
-			SpotMarketID:        "bnb:jpy",
-			LiquidationMarketID: "bnb:jpy",
+			SpotMarketID:        "bnb:eur",
+			LiquidationMarketID: "bnb:eur",
 		},
 		{
 			Denom:               "btc",
 			LiquidationRatio:    d("1.5"),
-			DebtLimit:           c("jpyx", 1000000000),
+			DebtLimit:           c("eurx", 1000000000),
 			StabilityFee:        d("1.000000001547125958"),
 			LiquidationPenalty:  d("0.10"),
 			AuctionSize:         i(1000),
 			Prefix:              0x30,
 			ConversionFactor:    i(8),
-			SpotMarketID:        "btc:jpy",
-			LiquidationMarketID: "btc:jpy",
+			SpotMarketID:        "btc:eur",
+			LiquidationMarketID: "btc:eur",
 		},
 		{
 			Denom:               "atom",
 			LiquidationRatio:    d("2.0"),
-			DebtLimit:           c("jpyx", 1000000000),
+			DebtLimit:           c("eurx", 1000000000),
 			StabilityFee:        d("1.000000001547125958"),
 			LiquidationPenalty:  d("0.07"),
 			AuctionSize:         i(100),
 			Prefix:              0x40,
 			ConversionFactor:    i(6),
-			SpotMarketID:        "atom:jpy",
-			LiquidationMarketID: "atom:jpy",
+			SpotMarketID:        "atom:eur",
+			LiquidationMarketID: "atom:eur",
 		},
 	}
 	updatedTestCPs := make(cdptypes.CollateralParams, len(testCPs))
@@ -57,9 +57,9 @@ func (suite *PermissionsTestSuite) TestAllowedCollateralParams_Allows() {
 	updatedTestCPs[1] = testCPs[0]
 	updatedTestCPs[2] = testCPs[2]
 
-	updatedTestCPs[0].DebtLimit = c("jpyx", 1000)    // btc
+	updatedTestCPs[0].DebtLimit = c("eurx", 1000)    // btc
 	updatedTestCPs[1].LiquidationPenalty = d("0.15") // bnb
-	updatedTestCPs[2].DebtLimit = c("jpyx", 1000)    // atom
+	updatedTestCPs[2].DebtLimit = c("eurx", 1000)    // atom
 	updatedTestCPs[2].LiquidationPenalty = d("0.15") // atom
 
 	testcases := []struct {
@@ -267,23 +267,23 @@ func (suite *PermissionsTestSuite) TestAllowedAssetParams_Allows() {
 func (suite *PermissionsTestSuite) TestAllowedMarkets_Allows() {
 	testMs := pricefeedtypes.Markets{
 		{
-			MarketID:   "bnb:jpy",
+			MarketID:   "bnb:eur",
 			BaseAsset:  "bnb",
-			QuoteAsset: "jpy",
+			QuoteAsset: "eur",
 			Oracles:    []sdk.AccAddress{},
 			Active:     true,
 		},
 		{
-			MarketID:   "btc:jpy",
+			MarketID:   "btc:eur",
 			BaseAsset:  "btc",
-			QuoteAsset: "jpy",
+			QuoteAsset: "eur",
 			Oracles:    []sdk.AccAddress{},
 			Active:     true,
 		},
 		{
-			MarketID:   "atom:jpy",
+			MarketID:   "atom:eur",
 			BaseAsset:  "atom",
-			QuoteAsset: "jpy",
+			QuoteAsset: "eur",
 			Oracles:    []sdk.AccAddress{},
 			Active:     true,
 		},
@@ -309,15 +309,15 @@ func (suite *PermissionsTestSuite) TestAllowedMarkets_Allows() {
 			name: "disallowed add",
 			allowed: AllowedMarkets{
 				{
-					MarketID: "bnb:jpy",
+					MarketID: "bnb:eur",
 					Active:   true,
 				},
 				{
-					MarketID: "btc:jpy",
+					MarketID: "btc:eur",
 					Oracles:  true,
 				},
 				{ // allow all fields
-					MarketID:   "atom:jpy",
+					MarketID:   "atom:eur",
 					BaseAsset:  true,
 					QuoteAsset: true,
 					Oracles:    true,
@@ -332,11 +332,11 @@ func (suite *PermissionsTestSuite) TestAllowedMarkets_Allows() {
 			name: "disallowed remove",
 			allowed: AllowedMarkets{
 				{
-					MarketID: "bnb:jpy",
+					MarketID: "bnb:eur",
 					Active:   true,
 				},
 				{ // allow all fields
-					MarketID:   "btc:jpy",
+					MarketID:   "btc:eur",
 					BaseAsset:  true,
 					QuoteAsset: true,
 					Oracles:    true,
@@ -351,15 +351,15 @@ func (suite *PermissionsTestSuite) TestAllowedMarkets_Allows() {
 			name: "allowed change with different order",
 			allowed: AllowedMarkets{
 				{
-					MarketID: "bnb:jpy",
+					MarketID: "bnb:eur",
 					Active:   true,
 				},
 				{
-					MarketID: "btc:jpy",
+					MarketID: "btc:eur",
 					Oracles:  true,
 				},
 				{
-					MarketID: "atom:jpy",
+					MarketID: "atom:eur",
 					Oracles:  true,
 					Active:   true,
 				},
@@ -383,24 +383,24 @@ func (suite *PermissionsTestSuite) TestAllowedCollateralParam_Allows() {
 	testCP := cdptypes.CollateralParam{
 		Denom:               "bnb",
 		LiquidationRatio:    d("1.5"),
-		DebtLimit:           c("jpyx", 1000000000000),
+		DebtLimit:           c("eurx", 1000000000000),
 		StabilityFee:        d("1.000000001547125958"), // %5 apr
 		LiquidationPenalty:  d("0.05"),
 		AuctionSize:         i(100),
 		Prefix:              0x20,
 		ConversionFactor:    i(6),
-		SpotMarketID:        "bnb:jpy",
-		LiquidationMarketID: "bnb:jpy",
+		SpotMarketID:        "bnb:eur",
+		LiquidationMarketID: "bnb:eur",
 	}
 	newMarketIDCP := testCP
-	newMarketIDCP.SpotMarketID = "btc:jpy"
+	newMarketIDCP.SpotMarketID = "btc:eur"
 
 	newDebtLimitCP := testCP
-	newDebtLimitCP.DebtLimit = c("jpyx", 1000)
+	newDebtLimitCP.DebtLimit = c("eurx", 1000)
 
 	newMarketIDAndDebtLimitCP := testCP
-	newMarketIDCP.SpotMarketID = "btc:jpy"
-	newDebtLimitCP.DebtLimit = c("jpyx", 1000)
+	newMarketIDCP.SpotMarketID = "btc:eur"
+	newDebtLimitCP.DebtLimit = c("eurx", 1000)
 
 	testcases := []struct {
 		name          string
@@ -488,20 +488,20 @@ func (suite *PermissionsTestSuite) TestAllowedCollateralParam_Allows() {
 
 func (suite *PermissionsTestSuite) TestAllowedDebtParam_Allows() {
 	testDP := cdptypes.DebtParam{
-		Denom:            "jpyx",
-		ReferenceAsset:   "jpy",
+		Denom:            "eurx",
+		ReferenceAsset:   "eur",
 		ConversionFactor: i(6),
 		DebtFloor:        i(10000000),
 		SavingsRate:      d("0.95"),
 	}
 	newDenomDP := testDP
-	newDenomDP.Denom = "jpyz"
+	newDenomDP.Denom = "eurz"
 
 	newDebtFloorDP := testDP
 	newDebtFloorDP.DebtFloor = i(1000)
 
 	newDenomAndDebtFloorDP := testDP
-	newDenomAndDebtFloorDP.Denom = "jpyz"
+	newDenomAndDebtFloorDP.Denom = "eurz"
 	newDenomAndDebtFloorDP.DebtFloor = i(1000)
 
 	testcases := []struct {
@@ -575,7 +575,7 @@ func (suite *PermissionsTestSuite) TestAllowedDebtParam_Allows() {
 
 func (suite *PermissionsTestSuite) TestAllowedAssetParam_Allows() {
 	testAP := bep3types.AssetParam{
-		Denom:  "jpyx",
+		Denom:  "eurx",
 		CoinID: 999,
 		Limit:  i(1000000000),
 		Active: true,
@@ -600,7 +600,7 @@ func (suite *PermissionsTestSuite) TestAllowedAssetParam_Allows() {
 		{
 			name: "allowed change",
 			allowed: AllowedAssetParam{
-				Denom: "jpyx",
+				Denom: "eurx",
 				Limit: true,
 			},
 			current:       testAP,
@@ -610,7 +610,7 @@ func (suite *PermissionsTestSuite) TestAllowedAssetParam_Allows() {
 		{
 			name: "un-allowed change",
 			allowed: AllowedAssetParam{
-				Denom: "jpyx",
+				Denom: "eurx",
 				Limit: true,
 			},
 			current:       testAP,
@@ -620,7 +620,7 @@ func (suite *PermissionsTestSuite) TestAllowedAssetParam_Allows() {
 		{
 			name: "allowed no change",
 			allowed: AllowedAssetParam{
-				Denom: "jpyx",
+				Denom: "eurx",
 				Limit: true,
 			},
 			current:       testAP,
@@ -630,7 +630,7 @@ func (suite *PermissionsTestSuite) TestAllowedAssetParam_Allows() {
 		{
 			name: "un-allowed change with allowed change",
 			allowed: AllowedAssetParam{
-				Denom: "jpyx",
+				Denom: "eurx",
 				Limit: true,
 			},
 			current:       testAP,
@@ -661,9 +661,9 @@ func (suite *PermissionsTestSuite) TestAllowedAssetParam_Allows() {
 
 func (suite *PermissionsTestSuite) TestAllowedMarket_Allows() {
 	testM := pricefeedtypes.Market{
-		MarketID:   "bnb:jpy",
+		MarketID:   "bnb:eur",
 		BaseAsset:  "bnb",
-		QuoteAsset: "jpy",
+		QuoteAsset: "eur",
 		Oracles:    []sdk.AccAddress{[]byte("a test address")},
 		Active:     true,
 	}
@@ -687,7 +687,7 @@ func (suite *PermissionsTestSuite) TestAllowedMarket_Allows() {
 		{
 			name: "allowed change",
 			allowed: AllowedMarket{
-				MarketID: "bnb:jpy",
+				MarketID: "bnb:eur",
 				Active:   true,
 			},
 			current:       testM,
@@ -697,7 +697,7 @@ func (suite *PermissionsTestSuite) TestAllowedMarket_Allows() {
 		{
 			name: "un-allowed change",
 			allowed: AllowedMarket{
-				MarketID: "bnb:jpy",
+				MarketID: "bnb:eur",
 				Active:   true,
 			},
 			current:       testM,
@@ -707,7 +707,7 @@ func (suite *PermissionsTestSuite) TestAllowedMarket_Allows() {
 		{
 			name: "allowed no change",
 			allowed: AllowedMarket{
-				MarketID: "bnb:jpy",
+				MarketID: "bnb:eur",
 				Active:   true,
 			},
 			current:       testM,
@@ -717,7 +717,7 @@ func (suite *PermissionsTestSuite) TestAllowedMarket_Allows() {
 		{
 			name: "un-allowed change with allowed change",
 			allowed: AllowedMarket{
-				MarketID: "bnb:jpy",
+				MarketID: "bnb:eur",
 				Active:   true,
 			},
 			current:       testM,

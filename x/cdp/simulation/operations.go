@@ -9,9 +9,9 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 
-	appparams "github.com/lcnem/jpyx/app/params"
-	"github.com/lcnem/jpyx/x/cdp/keeper"
-	"github.com/lcnem/jpyx/x/cdp/types"
+	appparams "github.com/lcnem/eurx/app/params"
+	"github.com/lcnem/eurx/x/cdp/keeper"
+	"github.com/lcnem/eurx/x/cdp/types"
 )
 
 // Simulation operation weights constants

@@ -1,6 +1,6 @@
 {
   "genesis_time": "2020-07-25T02:40:29.04401376Z",
-  "chain_id": "jpyx-1",
+  "chain_id": "eurx-1",
   "consensus_params": {
     "block": {
       "max_bytes": "22020096",
@@ -89,7 +89,7 @@
         {
           "type": "cosmos-sdk/Account",
           "value": {
-            "address": "jpyx1ywlzznn4edvw4xag5c0s66xj53vfm4887pvvyq",
+            "address": "eurx1ywlzznn4edvw4xag5c0s66xj53vfm4887pvvyq",
             "coins": [
               {
                 "denom": "ujpst",
@@ -104,7 +104,7 @@
         {
           "type": "cosmos-sdk/Account",
           "value": {
-            "address": "jpyx1gfln6xldk034l2zwrezuv26dkheq9ua4dckgwc",
+            "address": "eurx1gfln6xldk034l2zwrezuv26dkheq9ua4dckgwc",
             "coins": [
               {
                 "denom": "ujpst",
@@ -148,7 +148,7 @@
                 "type": "cosmos-sdk/MsgCreateValidator",
                 "value": {
                   "description": {
-                    "moniker": "jpyx-b",
+                    "moniker": "eurx-b",
                     "identity": "",
                     "website": "",
                     "security_contact": "",
@@ -160,9 +160,9 @@
                     "max_change_rate": "0.010000000000000000"
                   },
                   "min_self_delegation": "1",
-                  "delegator_address": "jpyx1gfln6xldk034l2zwrezuv26dkheq9ua4dckgwc",
-                  "validator_address": "jpyxvaloper1gfln6xldk034l2zwrezuv26dkheq9ua4hc3wg6",
-                  "pubkey": "jpyxvalconspub1zcjduepq96g5qglc5vkrae58jmnyg8sy5c03n6f3v5hf3upt5csdzpqwqezs7g3jea",
+                  "delegator_address": "eurx1gfln6xldk034l2zwrezuv26dkheq9ua4dckgwc",
+                  "validator_address": "eurxvaloper1gfln6xldk034l2zwrezuv26dkheq9ua4hc3wg6",
+                  "pubkey": "eurxvalconspub1zcjduepq96g5qglc5vkrae58jmnyg8sy5c03n6f3v5hf3upt5csdzpqwqezs7g3jea",
                   "value": {
                     "denom": "ujpst",
                     "amount": "500000000000"
@@ -194,7 +194,7 @@
                 "type": "cosmos-sdk/MsgCreateValidator",
                 "value": {
                   "description": {
-                    "moniker": "jpyx-a",
+                    "moniker": "eurx-a",
                     "identity": "",
                     "website": "",
                     "security_contact": "",
@@ -206,9 +206,9 @@
                     "max_change_rate": "0.010000000000000000"
                   },
                   "min_self_delegation": "1",
-                  "delegator_address": "jpyx1ywlzznn4edvw4xag5c0s66xj53vfm4887pvvyq",
-                  "validator_address": "jpyxvaloper1ywlzznn4edvw4xag5c0s66xj53vfm488ypt2zz",
-                  "pubkey": "jpyxvalconspub1zcjduepq4936xehacy9haaw5k765rnc5ljzgxe3929xl4hmpqrdcawj3xxcq4jsjlt",
+                  "delegator_address": "eurx1ywlzznn4edvw4xag5c0s66xj53vfm4887pvvyq",
+                  "validator_address": "eurxvaloper1ywlzznn4edvw4xag5c0s66xj53vfm488ypt2zz",
+                  "pubkey": "eurxvalconspub1zcjduepq4936xehacy9haaw5k765rnc5ljzgxe3929xl4hmpqrdcawj3xxcq4jsjlt",
                   "value": {
                     "denom": "ujpst",
                     "amount": "500000000000"
@@ -236,7 +236,7 @@
     },
     "bep3": {
       "params": {
-        "bnb_deputy_address": "jpyx1s7gmzmjp5vlffawk9xch0cw9f4es06u9wn9hwq",
+        "bnb_deputy_address": "eurx1s7gmzmjp5vlffawk9xch0cw9f4es06u9wn9hwq",
         "bnb_deputy_fixed_fee": "1000",
         "min_amount": "0",
         "max_amount": "1000000000000",
@@ -289,14 +289,14 @@
       "params": {
         "collateral_params": [],
         "debt_param": {
-          "denom": "jpyx",
-          "reference_asset": "jpy",
+          "denom": "eurx",
+          "reference_asset": "eur",
           "conversion_factor": "6",
           "debt_floor": "10000000",
           "savings_rate": "0.950000000000000000"
         },
         "global_debt_limit": {
-          "denom": "jpyx",
+          "denom": "eurx",
           "amount": "0"
         },
         "surplus_auction_threshold": "500000000000",

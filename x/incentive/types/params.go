@@ -9,8 +9,8 @@ import (
 
 	tmtime "github.com/tendermint/tendermint/types/time"
 
-	cdptypes "github.com/lcnem/jpyx/x/cdp/types"
-	stakedistTypes "github.com/lcnem/jpyx/x/stakedist/types"
+	cdptypes "github.com/lcnem/eurx/x/cdp/types"
+	stakedistTypes "github.com/lcnem/eurx/x/stakedist/types"
 )
 
 // Parameter keys and default values
@@ -21,7 +21,7 @@ var (
 	DefaultRewards           = Rewards{}
 	DefaultPreviousBlockTime = tmtime.Canonical(time.Unix(0, 0))
 	GovDenom                 = cdptypes.DefaultGovDenom
-	PrincipalDenom           = "jpyx"
+	PrincipalDenom           = "eurx"
 	IncentiveMacc            = stakedistTypes.ModuleName
 )
 

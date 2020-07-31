@@ -16,11 +16,11 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/lcnem/jpyx/x/incentive/client/cli"
-	"github.com/lcnem/jpyx/x/incentive/client/rest"
-	"github.com/lcnem/jpyx/x/incentive/keeper"
-	"github.com/lcnem/jpyx/x/incentive/simulation"
-	"github.com/lcnem/jpyx/x/incentive/types"
+	"github.com/lcnem/eurx/x/incentive/client/cli"
+	"github.com/lcnem/eurx/x/incentive/client/rest"
+	"github.com/lcnem/eurx/x/incentive/keeper"
+	"github.com/lcnem/eurx/x/incentive/simulation"
+	"github.com/lcnem/eurx/x/incentive/types"
 )
 
 var (

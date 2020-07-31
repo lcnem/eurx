@@ -19,8 +19,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/supply"
 	supplyexported "github.com/cosmos/cosmos-sdk/x/supply/exported"
 
-	"github.com/lcnem/jpyx/x/validator-vesting/keeper"
-	"github.com/lcnem/jpyx/x/validator-vesting/types"
+	"github.com/lcnem/eurx/x/validator-vesting/keeper"
+	"github.com/lcnem/eurx/x/validator-vesting/types"
 )
 
 var (

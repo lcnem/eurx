@@ -7,7 +7,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/lcnem/jpyx/x/auction/types"
+	"github.com/lcnem/eurx/x/auction/types"
 )
 
 // RegisterInvariants registers all staking invariants

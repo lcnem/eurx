@@ -4,10 +4,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/lcnem/jpyx/app"
-	"github.com/lcnem/jpyx/x/committee"
-	"github.com/lcnem/jpyx/x/committee/keeper"
-	"github.com/lcnem/jpyx/x/committee/types"
+	"github.com/lcnem/eurx/app"
+	"github.com/lcnem/eurx/x/committee"
+	"github.com/lcnem/eurx/x/committee/keeper"
+	"github.com/lcnem/eurx/x/committee/types"
 )
 
 // Avoid cluttering test cases with long function names

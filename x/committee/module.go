@@ -16,9 +16,9 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/lcnem/jpyx/x/committee/client/cli"
-	"github.com/lcnem/jpyx/x/committee/client/rest"
-	"github.com/lcnem/jpyx/x/committee/simulation"
+	"github.com/lcnem/eurx/x/committee/client/cli"
+	"github.com/lcnem/eurx/x/committee/client/rest"
+	"github.com/lcnem/eurx/x/committee/simulation"
 )
 
 var (

@@ -10,7 +10,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 
-	"github.com/lcnem/jpyx/x/stakedist/types"
+	"github.com/lcnem/eurx/x/stakedist/types"
 )
 
 // SecondsPerYear is the number of seconds in a year

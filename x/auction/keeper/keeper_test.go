@@ -8,8 +8,8 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/lcnem/jpyx/app"
-	"github.com/lcnem/jpyx/x/auction/types"
+	"github.com/lcnem/eurx/app"
+	"github.com/lcnem/eurx/x/auction/types"
 )
 
 func SetGetDeleteAuction(t *testing.T) {
@@ -19,7 +19,7 @@ func SetGetDeleteAuction(t *testing.T) {
 	ctx := tApp.NewContext(true, abci.Header{})
 	someTime := time.Date(43, time.January, 1, 0, 0, 0, 0, time.UTC) // need to specify UTC as tz info is lost on unmarshal
 	var id uint64 = 5
-	auction := types.NewSurplusAuction("some_module", c("jpyx", 100), "stake", someTime).WithID(id)
+	auction := types.NewSurplusAuction("some_module", c("eurx", 100), "stake", someTime).WithID(id)
 
 	// write and read from store
 	keeper.SetAuction(ctx, auction)

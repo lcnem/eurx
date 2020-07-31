@@ -1,4 +1,4 @@
-# JPYX documentation
+# EURX documentation
 
 ## Environment
 
@@ -19,8 +19,8 @@ source ~/.bashrc
 ```shell
 mkdir -p /usr/local/src/github.com/lcnem
 cd /usr/local/src/github.com/lcnem
-git clone https://github.com/lcnem/jpyx.git
-cd jpyx
+git clone https://github.com/lcnem/eurx.git
+cd eurx
 git checkout v0.1.0
 make install
 ```
@@ -28,32 +28,32 @@ make install
 ## Setup genesis.json
 
 ```shell
-jpyxd init [moniker] --chain-id jpyx-1
-cd /usr/local/src/github.com/lcnem/jpyx
-cp launch/genesis.json ~/.jpyxd/config/genesis.json
+eurxd init [moniker] --chain-id eurx-1
+cd /usr/local/src/github.com/lcnem/eurx
+cp launch/genesis.json ~/.eurxd/config/genesis.json
 ```
 
 ## Setup services
 
 ```shell
-jpyxcli config chain-id jpyx-1
-jpyxcli config trust-node true
+eurxcli config chain-id eurx-1
+eurxcli config trust-node true
 ```
 
 ### Daemon service
 
 ```shell
-vi /etc/systemd/system/jpyxd.service
+vi /etc/systemd/system/eurxd.service
 ```
 
 ```toml
 [Unit]
-Description=JPYX Node
+Description=EURX Node
 After=network-online.target
 
 [Service]
 User=root
-ExecStart=/root/go/bin/jpyxd start
+ExecStart=/root/go/bin/eurxd start
 Restart=always
 RestartSec=3
 LimitNOFILE=4096
@@ -63,23 +63,23 @@ WantedBy=multi-user.target
 ```
 
 ```shell
-systemctl enable jpyxd
+systemctl enable eurxd
 ```
 
 ### REST service
 
 ```shell
-vi /etc/systemd/system/jpyxrest.service
+vi /etc/systemd/system/eurxrest.service
 ```
 
 ```toml
 [Unit]
-Description=JPYX Rest
+Description=EURX Rest
 After=network-online.target
 
 [Service]
 User=root
-ExecStart=/root/go/bin/jpyxcli rest-server
+ExecStart=/root/go/bin/eurxcli rest-server
 Restart=always
 RestartSec=3
 LimitNOFILE=4096
@@ -89,5 +89,5 @@ WantedBy=multi-user.target
 ```
 
 ```shell
-systemctl enable jpyxrest
+systemctl enable eurxrest
 ```

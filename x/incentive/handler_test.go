@@ -11,9 +11,9 @@ import (
 	abci "github.com/tendermint/tendermint/abci/types"
 	tmtime "github.com/tendermint/tendermint/types/time"
 
-	"github.com/lcnem/jpyx/app"
-	"github.com/lcnem/jpyx/x/incentive"
-	stakedist "github.com/lcnem/jpyx/x/stakedist"
+	"github.com/lcnem/eurx/app"
+	"github.com/lcnem/eurx/x/incentive"
+	stakedist "github.com/lcnem/eurx/x/stakedist"
 )
 
 func cs(coins ...sdk.Coin) sdk.Coins        { return sdk.NewCoins(coins...) }

@@ -13,10 +13,10 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/lcnem/jpyx/app"
-	"github.com/lcnem/jpyx/x/cdp"
-	cdptypes "github.com/lcnem/jpyx/x/cdp/types"
-	"github.com/lcnem/jpyx/x/committee"
+	"github.com/lcnem/eurx/app"
+	"github.com/lcnem/eurx/x/cdp"
+	cdptypes "github.com/lcnem/eurx/x/cdp/types"
+	"github.com/lcnem/eurx/x/committee"
 )
 
 type ModuleTestSuite struct {

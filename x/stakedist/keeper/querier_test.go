@@ -4,8 +4,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/lcnem/jpyx/x/stakedist/keeper"
-	"github.com/lcnem/jpyx/x/stakedist/types"
+	"github.com/lcnem/eurx/x/stakedist/keeper"
+	"github.com/lcnem/eurx/x/stakedist/types"
 )
 
 func (suite *KeeperTestSuite) TestQuerierGetParams() {

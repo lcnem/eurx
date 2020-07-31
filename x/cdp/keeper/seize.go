@@ -5,7 +5,7 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/lcnem/jpyx/x/cdp/types"
+	"github.com/lcnem/eurx/x/cdp/types"
 )
 
 // SeizeCollateral liquidates the collateral in the input cdp.

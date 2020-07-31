@@ -9,9 +9,9 @@ import (
 	abci "github.com/tendermint/tendermint/abci/types"
 	tmtime "github.com/tendermint/tendermint/types/time"
 
-	"github.com/lcnem/jpyx/app"
-	"github.com/lcnem/jpyx/x/cdp"
-	"github.com/lcnem/jpyx/x/cdp/keeper"
+	"github.com/lcnem/eurx/app"
+	"github.com/lcnem/eurx/x/cdp"
+	"github.com/lcnem/eurx/x/cdp/keeper"
 )
 
 // saving the result to a module level variable ensures the compiler doesn't optimize the test away
@@ -37,7 +37,7 @@ func BenchmarkAccountIteration(b *testing.B) {
 	}
 	coins := sdk.Coins{
 		sdk.NewCoin("xrp", sdk.NewInt(1000000000)),
-		sdk.NewCoin("jpyx", sdk.NewInt(1000000000)),
+		sdk.NewCoin("eurx", sdk.NewInt(1000000000)),
 	}
 
 	for _, bm := range benchmarks {
@@ -86,7 +86,7 @@ func createCdps(n int) (app.TestApp, sdk.Context, keeper.Keeper) {
 	)
 	cdpKeeper := tApp.GetCDPKeeper()
 	for i := 0; i < n; i++ {
-		err := cdpKeeper.AddCdp(ctx, addrs[i], coins[i][0], c("jpyx", 100000000))
+		err := cdpKeeper.AddCdp(ctx, addrs[i], coins[i][0], c("eurx", 100000000))
 		if err != nil {
 			panic("failed to create cdp")
 		}
@@ -138,7 +138,7 @@ func BenchmarkCdpCreation(b *testing.B) {
 	cdpKeeper := tApp.GetCDPKeeper()
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		err := cdpKeeper.AddCdp(ctx, addrs[i], coins[i][0], c("jpyx", 100000000))
+		err := cdpKeeper.AddCdp(ctx, addrs[i], coins[i][0], c("eurx", 100000000))
 		if err != nil {
 			b.Error("unexpected error")
 		}

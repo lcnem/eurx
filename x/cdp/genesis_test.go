@@ -9,8 +9,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/lcnem/jpyx/app"
-	"github.com/lcnem/jpyx/x/cdp"
+	"github.com/lcnem/eurx/app"
+	"github.com/lcnem/eurx/x/cdp"
 )
 
 type GenesisTestSuite struct {

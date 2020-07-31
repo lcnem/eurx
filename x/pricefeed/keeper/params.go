@@ -4,7 +4,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
-	"github.com/lcnem/jpyx/x/pricefeed/types"
+	"github.com/lcnem/eurx/x/pricefeed/types"
 )
 
 // GetParams returns the params from the store

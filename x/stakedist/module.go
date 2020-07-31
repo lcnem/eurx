@@ -15,11 +15,11 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/lcnem/jpyx/x/stakedist/client/cli"
-	"github.com/lcnem/jpyx/x/stakedist/client/rest"
-	"github.com/lcnem/jpyx/x/stakedist/keeper"
-	"github.com/lcnem/jpyx/x/stakedist/simulation"
-	"github.com/lcnem/jpyx/x/stakedist/types"
+	"github.com/lcnem/eurx/x/stakedist/client/cli"
+	"github.com/lcnem/eurx/x/stakedist/client/rest"
+	"github.com/lcnem/eurx/x/stakedist/keeper"
+	"github.com/lcnem/eurx/x/stakedist/simulation"
+	"github.com/lcnem/eurx/x/stakedist/types"
 )
 
 var (

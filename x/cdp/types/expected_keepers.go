@@ -7,7 +7,7 @@ import (
 	authexported "github.com/cosmos/cosmos-sdk/x/auth/exported"
 	supplyexported "github.com/cosmos/cosmos-sdk/x/supply/exported"
 
-	pftypes "github.com/lcnem/jpyx/x/pricefeed/types"
+	pftypes "github.com/lcnem/eurx/x/pricefeed/types"
 )
 
 // SupplyKeeper defines the expected supply keeper for module accounts  (noalias)

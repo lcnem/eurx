@@ -13,11 +13,11 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/lcnem/jpyx/app"
-	cdptypes "github.com/lcnem/jpyx/x/cdp/types"
-	"github.com/lcnem/jpyx/x/committee"
-	"github.com/lcnem/jpyx/x/committee/keeper"
-	"github.com/lcnem/jpyx/x/committee/types"
+	"github.com/lcnem/eurx/app"
+	cdptypes "github.com/lcnem/eurx/x/cdp/types"
+	"github.com/lcnem/eurx/x/committee"
+	"github.com/lcnem/eurx/x/committee/keeper"
+	"github.com/lcnem/eurx/x/committee/types"
 )
 
 // NewDistributionGenesisWithPool creates a default distribution genesis state with some coins in the community pool.

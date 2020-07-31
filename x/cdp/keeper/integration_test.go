@@ -7,9 +7,9 @@ import (
 
 	tmtime "github.com/tendermint/tendermint/types/time"
 
-	"github.com/lcnem/jpyx/app"
-	"github.com/lcnem/jpyx/x/cdp"
-	"github.com/lcnem/jpyx/x/pricefeed"
+	"github.com/lcnem/eurx/app"
+	"github.com/lcnem/eurx/x/cdp"
+	"github.com/lcnem/eurx/x/pricefeed"
 )
 
 // Avoid cluttering test cases with long function names
@@ -22,12 +22,12 @@ func NewPricefeedGenState(asset string, price sdk.Dec) app.GenesisState {
 	pfGenesis := pricefeed.GenesisState{
 		Params: pricefeed.Params{
 			Markets: []pricefeed.Market{
-				{MarketID: asset + ":jpy", BaseAsset: asset, QuoteAsset: "jpy", Oracles: []sdk.AccAddress{}, Active: true},
+				{MarketID: asset + ":eur", BaseAsset: asset, QuoteAsset: "eur", Oracles: []sdk.AccAddress{}, Active: true},
 			},
 		},
 		PostedPrices: []pricefeed.PostedPrice{
 			{
-				MarketID:      asset + ":jpy",
+				MarketID:      asset + ":eur",
 				OracleAddress: sdk.AccAddress{},
 				Price:         price,
 				Expiry:        time.Now().Add(1 * time.Hour),
@@ -40,7 +40,7 @@ func NewPricefeedGenState(asset string, price sdk.Dec) app.GenesisState {
 func NewCDPGenState(asset string, liquidationRatio sdk.Dec) app.GenesisState {
 	cdpGenesis := cdp.GenesisState{
 		Params: cdp.Params{
-			GlobalDebtLimit:              sdk.NewInt64Coin("jpyx", 1000000000000),
+			GlobalDebtLimit:              sdk.NewInt64Coin("eurx", 1000000000000),
 			SurplusAuctionThreshold:      cdp.DefaultSurplusThreshold,
 			SurplusAuctionLot:            cdp.DefaultSurplusLot,
 			DebtAuctionThreshold:         cdp.DefaultDebtThreshold,
@@ -50,19 +50,19 @@ func NewCDPGenState(asset string, liquidationRatio sdk.Dec) app.GenesisState {
 				{
 					Denom:               asset,
 					LiquidationRatio:    liquidationRatio,
-					DebtLimit:           sdk.NewInt64Coin("jpyx", 1000000000000),
+					DebtLimit:           sdk.NewInt64Coin("eurx", 1000000000000),
 					StabilityFee:        sdk.MustNewDecFromStr("1.000000001547125958"), // %5 apr
 					LiquidationPenalty:  d("0.05"),
 					AuctionSize:         i(100),
 					Prefix:              0x20,
 					ConversionFactor:    i(6),
-					SpotMarketID:        asset + ":jpy",
-					LiquidationMarketID: asset + ":jpy",
+					SpotMarketID:        asset + ":eur",
+					LiquidationMarketID: asset + ":eur",
 				},
 			},
 			DebtParam: cdp.DebtParam{
-				Denom:            "jpyx",
-				ReferenceAsset:   "jpy",
+				Denom:            "eurx",
+				ReferenceAsset:   "eur",
 				ConversionFactor: i(6),
 				DebtFloor:        i(10000000),
 				SavingsRate:      d("0.9"),
@@ -81,26 +81,26 @@ func NewPricefeedGenStateMulti() app.GenesisState {
 	pfGenesis := pricefeed.GenesisState{
 		Params: pricefeed.Params{
 			Markets: []pricefeed.Market{
-				{MarketID: "btc:jpy", BaseAsset: "btc", QuoteAsset: "jpy", Oracles: []sdk.AccAddress{}, Active: true},
-				{MarketID: "xrp:jpy", BaseAsset: "xrp", QuoteAsset: "jpy", Oracles: []sdk.AccAddress{}, Active: true},
-				{MarketID: "bnb:jpy", BaseAsset: "bnb", QuoteAsset: "jpy", Oracles: []sdk.AccAddress{}, Active: true},
+				{MarketID: "btc:eur", BaseAsset: "btc", QuoteAsset: "eur", Oracles: []sdk.AccAddress{}, Active: true},
+				{MarketID: "xrp:eur", BaseAsset: "xrp", QuoteAsset: "eur", Oracles: []sdk.AccAddress{}, Active: true},
+				{MarketID: "bnb:eur", BaseAsset: "bnb", QuoteAsset: "eur", Oracles: []sdk.AccAddress{}, Active: true},
 			},
 		},
 		PostedPrices: []pricefeed.PostedPrice{
 			{
-				MarketID:      "btc:jpy",
+				MarketID:      "btc:eur",
 				OracleAddress: sdk.AccAddress{},
 				Price:         sdk.MustNewDecFromStr("8000.00"),
 				Expiry:        time.Now().Add(1 * time.Hour),
 			},
 			{
-				MarketID:      "xrp:jpy",
+				MarketID:      "xrp:eur",
 				OracleAddress: sdk.AccAddress{},
 				Price:         sdk.MustNewDecFromStr("0.25"),
 				Expiry:        time.Now().Add(1 * time.Hour),
 			},
 			{
-				MarketID:      "bnb:jpy",
+				MarketID:      "bnb:eur",
 				OracleAddress: sdk.AccAddress{},
 				Price:         sdk.MustNewDecFromStr("17.25"),
 				Expiry:        time.Now().Add(1 * time.Hour),
@@ -112,7 +112,7 @@ func NewPricefeedGenStateMulti() app.GenesisState {
 func NewCDPGenStateMulti() app.GenesisState {
 	cdpGenesis := cdp.GenesisState{
 		Params: cdp.Params{
-			GlobalDebtLimit:              sdk.NewInt64Coin("jpyx", 1500000000000),
+			GlobalDebtLimit:              sdk.NewInt64Coin("eurx", 1500000000000),
 			SurplusAuctionThreshold:      cdp.DefaultSurplusThreshold,
 			SurplusAuctionLot:            cdp.DefaultSurplusLot,
 			DebtAuctionThreshold:         cdp.DefaultDebtThreshold,
@@ -122,43 +122,43 @@ func NewCDPGenStateMulti() app.GenesisState {
 				{
 					Denom:               "xrp",
 					LiquidationRatio:    sdk.MustNewDecFromStr("2.0"),
-					DebtLimit:           sdk.NewInt64Coin("jpyx", 500000000000),
+					DebtLimit:           sdk.NewInt64Coin("eurx", 500000000000),
 					StabilityFee:        sdk.MustNewDecFromStr("1.000000001547125958"), // %5 apr
 					LiquidationPenalty:  d("0.05"),
 					AuctionSize:         i(7000000000),
 					Prefix:              0x20,
-					SpotMarketID:        "xrp:jpy",
-					LiquidationMarketID: "xrp:jpy",
+					SpotMarketID:        "xrp:eur",
+					LiquidationMarketID: "xrp:eur",
 					ConversionFactor:    i(6),
 				},
 				{
 					Denom:               "btc",
 					LiquidationRatio:    sdk.MustNewDecFromStr("1.5"),
-					DebtLimit:           sdk.NewInt64Coin("jpyx", 500000000000),
+					DebtLimit:           sdk.NewInt64Coin("eurx", 500000000000),
 					StabilityFee:        sdk.MustNewDecFromStr("1.000000000782997609"), // %2.5 apr
 					LiquidationPenalty:  d("0.025"),
 					AuctionSize:         i(10000000),
 					Prefix:              0x21,
-					SpotMarketID:        "btc:jpy",
-					LiquidationMarketID: "btc:jpy",
+					SpotMarketID:        "btc:eur",
+					LiquidationMarketID: "btc:eur",
 					ConversionFactor:    i(8),
 				},
 				{
 					Denom:               "bnb",
 					LiquidationRatio:    sdk.MustNewDecFromStr("1.5"),
-					DebtLimit:           sdk.NewInt64Coin("jpyx", 500000000000),
+					DebtLimit:           sdk.NewInt64Coin("eurx", 500000000000),
 					StabilityFee:        sdk.MustNewDecFromStr("1.000000001547125958"), // %5 apr
 					LiquidationPenalty:  d("0.05"),
 					AuctionSize:         i(50000000000),
 					Prefix:              0x22,
-					SpotMarketID:        "bnb:jpy",
-					LiquidationMarketID: "bnb:jpy",
+					SpotMarketID:        "bnb:eur",
+					LiquidationMarketID: "bnb:eur",
 					ConversionFactor:    i(8),
 				},
 			},
 			DebtParam: cdp.DebtParam{
-				Denom:            "jpyx",
-				ReferenceAsset:   "jpy",
+				Denom:            "eurx",
+				ReferenceAsset:   "eur",
 				ConversionFactor: i(6),
 				DebtFloor:        i(10000000),
 				SavingsRate:      d("0.95"),
@@ -176,7 +176,7 @@ func NewCDPGenStateMulti() app.GenesisState {
 func NewCDPGenStateHighDebtLimit() app.GenesisState {
 	cdpGenesis := cdp.GenesisState{
 		Params: cdp.Params{
-			GlobalDebtLimit:              sdk.NewInt64Coin("jpyx", 100000000000000),
+			GlobalDebtLimit:              sdk.NewInt64Coin("eurx", 100000000000000),
 			SurplusAuctionThreshold:      cdp.DefaultSurplusThreshold,
 			SurplusAuctionLot:            cdp.DefaultSurplusLot,
 			DebtAuctionThreshold:         cdp.DefaultDebtThreshold,
@@ -186,31 +186,31 @@ func NewCDPGenStateHighDebtLimit() app.GenesisState {
 				{
 					Denom:               "xrp",
 					LiquidationRatio:    sdk.MustNewDecFromStr("2.0"),
-					DebtLimit:           sdk.NewInt64Coin("jpyx", 50000000000000),
+					DebtLimit:           sdk.NewInt64Coin("eurx", 50000000000000),
 					StabilityFee:        sdk.MustNewDecFromStr("1.000000001547125958"), // %5 apr
 					LiquidationPenalty:  d("0.05"),
 					AuctionSize:         i(7000000000),
 					Prefix:              0x20,
-					SpotMarketID:        "xrp:jpy",
-					LiquidationMarketID: "xrp:jpy",
+					SpotMarketID:        "xrp:eur",
+					LiquidationMarketID: "xrp:eur",
 					ConversionFactor:    i(6),
 				},
 				{
 					Denom:               "btc",
 					LiquidationRatio:    sdk.MustNewDecFromStr("1.5"),
-					DebtLimit:           sdk.NewInt64Coin("jpyx", 50000000000000),
+					DebtLimit:           sdk.NewInt64Coin("eurx", 50000000000000),
 					StabilityFee:        sdk.MustNewDecFromStr("1.000000000782997609"), // %2.5 apr
 					LiquidationPenalty:  d("0.025"),
 					AuctionSize:         i(10000000),
 					Prefix:              0x21,
-					SpotMarketID:        "btc:jpy",
-					LiquidationMarketID: "btc:jpy",
+					SpotMarketID:        "btc:eur",
+					LiquidationMarketID: "btc:eur",
 					ConversionFactor:    i(8),
 				},
 			},
 			DebtParam: cdp.DebtParam{
-				Denom:            "jpyx",
-				ReferenceAsset:   "jpy",
+				Denom:            "eurx",
+				ReferenceAsset:   "eur",
 				ConversionFactor: i(6),
 				DebtFloor:        i(10000000),
 				SavingsRate:      d("0.95"),
@@ -227,10 +227,10 @@ func NewCDPGenStateHighDebtLimit() app.GenesisState {
 
 func cdps() (cdps cdp.CDPs) {
 	_, addrs := app.GeneratePrivKeyAddressPairs(3)
-	c1 := cdp.NewCDP(uint64(1), addrs[0], sdk.NewCoin("xrp", sdk.NewInt(10000000)), sdk.NewCoin("jpyx", sdk.NewInt(8000000)), tmtime.Canonical(time.Now()))
-	c2 := cdp.NewCDP(uint64(2), addrs[1], sdk.NewCoin("xrp", sdk.NewInt(100000000)), sdk.NewCoin("jpyx", sdk.NewInt(10000000)), tmtime.Canonical(time.Now()))
-	c3 := cdp.NewCDP(uint64(3), addrs[1], sdk.NewCoin("btc", sdk.NewInt(1000000000)), sdk.NewCoin("jpyx", sdk.NewInt(10000000)), tmtime.Canonical(time.Now()))
-	c4 := cdp.NewCDP(uint64(4), addrs[2], sdk.NewCoin("xrp", sdk.NewInt(1000000000)), sdk.NewCoin("jpyx", sdk.NewInt(500000000)), tmtime.Canonical(time.Now()))
+	c1 := cdp.NewCDP(uint64(1), addrs[0], sdk.NewCoin("xrp", sdk.NewInt(10000000)), sdk.NewCoin("eurx", sdk.NewInt(8000000)), tmtime.Canonical(time.Now()))
+	c2 := cdp.NewCDP(uint64(2), addrs[1], sdk.NewCoin("xrp", sdk.NewInt(100000000)), sdk.NewCoin("eurx", sdk.NewInt(10000000)), tmtime.Canonical(time.Now()))
+	c3 := cdp.NewCDP(uint64(3), addrs[1], sdk.NewCoin("btc", sdk.NewInt(1000000000)), sdk.NewCoin("eurx", sdk.NewInt(10000000)), tmtime.Canonical(time.Now()))
+	c4 := cdp.NewCDP(uint64(4), addrs[2], sdk.NewCoin("xrp", sdk.NewInt(1000000000)), sdk.NewCoin("eurx", sdk.NewInt(500000000)), tmtime.Canonical(time.Now()))
 	cdps = append(cdps, c1, c2, c3, c4)
 	return
 }

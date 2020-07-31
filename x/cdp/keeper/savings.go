@@ -9,7 +9,7 @@ import (
 	authexported "github.com/cosmos/cosmos-sdk/x/auth/exported"
 	supplyexported "github.com/cosmos/cosmos-sdk/x/supply/exported"
 
-	"github.com/lcnem/jpyx/x/cdp/types"
+	"github.com/lcnem/eurx/x/cdp/types"
 )
 
 // DistributeSavingsRate distributes surplus that has accumulated in the liquidator account to address holding stable coins according the the savings rate

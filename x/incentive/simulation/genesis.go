@@ -10,8 +10,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 
-	"github.com/lcnem/jpyx/x/cdp"
-	"github.com/lcnem/jpyx/x/incentive/types"
+	"github.com/lcnem/eurx/x/cdp"
+	"github.com/lcnem/eurx/x/incentive/types"
 )
 
 var (

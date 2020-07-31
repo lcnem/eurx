@@ -11,8 +11,8 @@ import (
 	authexported "github.com/cosmos/cosmos-sdk/x/auth/exported"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 
-	"github.com/lcnem/jpyx/x/committee/keeper"
-	"github.com/lcnem/jpyx/x/committee/types"
+	"github.com/lcnem/eurx/x/committee/keeper"
+	"github.com/lcnem/eurx/x/committee/types"
 )
 
 var (

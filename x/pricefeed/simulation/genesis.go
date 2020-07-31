@@ -9,14 +9,14 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 
-	"github.com/lcnem/jpyx/x/pricefeed/types"
-	pricefeed "github.com/lcnem/jpyx/x/pricefeed/types"
+	"github.com/lcnem/eurx/x/pricefeed/types"
+	pricefeed "github.com/lcnem/eurx/x/pricefeed/types"
 )
 
 var (
 	// BaseAssets is a list of collateral asset denoms
 	BaseAssets = [3]string{"bnb", "xrp", "btc"}
-	QuoteAsset = "jpy"
+	QuoteAsset = "eur"
 )
 
 // RandomizedGenState generates a random GenesisState for pricefeed
@@ -61,11 +61,11 @@ func loadPricefeedGenState(simState *module.SimulationState) pricefeed.GenesisSt
 // getInitialPrice gets the starting price for each of the base assets
 func getInitialPrice(marketID string) (price sdk.Dec) {
 	switch marketID {
-	case "btc:jpy":
+	case "btc:eur":
 		return sdk.MustNewDecFromStr("7000")
-	case "bnb:jpy":
+	case "bnb:eur":
 		return sdk.MustNewDecFromStr("14")
-	case "xrp:jpy":
+	case "xrp:eur":
 		return sdk.MustNewDecFromStr("0.2")
 	default:
 		return sdk.MustNewDecFromStr("20") // Catch future additional assets

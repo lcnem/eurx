@@ -8,7 +8,7 @@ RUN apk add bash git make libc-dev gcc linux-headers eudev-dev jq
 
 
 # Set working directory for the build
-WORKDIR /root/jpyx
+WORKDIR /root/eurx
 # default home directory is /root
 
 COPY go.mod .
@@ -19,9 +19,9 @@ RUN go mod download
 # Add source files
 COPY . .
 
-# Install jpyxd, jpyxcli
+# Install eurxd, eurxcli
 #ENV LEDGER_ENABLED False
 RUN make install
 
-# Run jpyxd by default, omit entrypoint to ease using container with kvcli
-CMD ["jpyxd"]
+# Run eurxd by default, omit entrypoint to ease using container with kvcli
+CMD ["eurxd"]

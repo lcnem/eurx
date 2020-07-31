@@ -9,7 +9,7 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/codec"
 
-	"github.com/lcnem/jpyx/x/auction/types"
+	"github.com/lcnem/eurx/x/auction/types"
 )
 
 // DecodeStore unmarshals the KVPair's Value to the corresponding auction type

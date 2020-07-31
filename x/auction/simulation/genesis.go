@@ -13,8 +13,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 	"github.com/cosmos/cosmos-sdk/x/supply"
 
-	"github.com/lcnem/jpyx/x/auction/types"
-	cdptypes "github.com/lcnem/jpyx/x/cdp/types"
+	"github.com/lcnem/eurx/x/auction/types"
+	cdptypes "github.com/lcnem/eurx/x/cdp/types"
 )
 
 const (
@@ -74,10 +74,10 @@ func RandomizedGenState(simState *module.SimulationState) {
 	auctions := types.GenesisAuctions{
 		types.NewDebtAuction(
 			cdptypes.LiquidatorMacc, // using cdp account rather than generic test one to avoid having to set permissions on the supply keeper
-			sdk.NewInt64Coin("jpyx", 100),
+			sdk.NewInt64Coin("eurx", 100),
 			sdk.NewInt64Coin("stake", 1000000000000),
 			simState.GenTimestamp.Add(time.Hour*5),
-			sdk.NewInt64Coin("debt", 100), // same as jpyx
+			sdk.NewInt64Coin("debt", 100), // same as eurx
 		),
 	}
 	var startingID = auctionGenesis.NextAuctionID
@@ -111,7 +111,7 @@ func RandomizedGenState(simState *module.SimulationState) {
 	if !found {
 		panic("bidder not found")
 	}
-	bidderCoins := sdk.NewCoins(sdk.NewInt64Coin("jpyx", 10000000000))
+	bidderCoins := sdk.NewCoins(sdk.NewInt64Coin("eurx", 10000000000))
 	if err := bidder.SetCoins(bidder.GetCoins().Add(bidderCoins...)); err != nil {
 		panic(err)
 	}

@@ -16,11 +16,11 @@ import (
 	abci "github.com/tendermint/tendermint/abci/types"
 	tmtime "github.com/tendermint/tendermint/types/time"
 
-	"github.com/lcnem/jpyx/app"
-	"github.com/lcnem/jpyx/x/cdp/keeper"
-	"github.com/lcnem/jpyx/x/cdp/types"
-	pfkeeper "github.com/lcnem/jpyx/x/pricefeed/keeper"
-	pftypes "github.com/lcnem/jpyx/x/pricefeed/types"
+	"github.com/lcnem/eurx/app"
+	"github.com/lcnem/eurx/x/cdp/keeper"
+	"github.com/lcnem/eurx/x/cdp/types"
+	pfkeeper "github.com/lcnem/eurx/x/pricefeed/keeper"
+	pftypes "github.com/lcnem/eurx/x/pricefeed/types"
 )
 
 const (
@@ -69,21 +69,21 @@ func (suite *QuerierTestSuite) SetupTest() {
 	oracle := addrs[9]
 	marketParams := pftypes.Params{
 		Markets: pftypes.Markets{
-			pftypes.Market{MarketID: "xrp-jpy", BaseAsset: "xrp", QuoteAsset: "jpy", Oracles: []sdk.AccAddress{oracle}, Active: true},
-			pftypes.Market{MarketID: "btc-jpy", BaseAsset: "btc", QuoteAsset: "jpy", Oracles: []sdk.AccAddress{oracle}, Active: true},
+			pftypes.Market{MarketID: "xrp-eur", BaseAsset: "xrp", QuoteAsset: "eur", Oracles: []sdk.AccAddress{oracle}, Active: true},
+			pftypes.Market{MarketID: "btc-eur", BaseAsset: "btc", QuoteAsset: "eur", Oracles: []sdk.AccAddress{oracle}, Active: true},
 		},
 	}
 	suite.pricefeedKeeper.SetParams(ctx, marketParams)
 
 	// Set collateral prices for use in collateralization calculations
 	_, err := suite.pricefeedKeeper.SetPrice(
-		ctx, oracle, "xrp-jpy",
+		ctx, oracle, "xrp-eur",
 		sdk.MustNewDecFromStr("0.75"),
 		time.Now().Add(1*time.Hour))
 	suite.Nil(err)
 
 	_, err = suite.pricefeedKeeper.SetPrice(
-		ctx, oracle, "btc-jpy",
+		ctx, oracle, "btc-eur",
 		sdk.MustNewDecFromStr("5000"),
 		time.Now().Add(1*time.Hour))
 	suite.Nil(err)
@@ -97,7 +97,7 @@ func (suite *QuerierTestSuite) SetupTest() {
 			amount = simulation.RandIntBetween(rand.New(rand.NewSource(int64(j))), 500000000, 5000000000)
 			debt = simulation.RandIntBetween(rand.New(rand.NewSource(int64(j))), 1000000000, 25000000000)
 		}
-		err = suite.keeper.AddCdp(suite.ctx, addrs[j], c(collateral, int64(amount)), c("jpyx", int64(debt)))
+		err = suite.keeper.AddCdp(suite.ctx, addrs[j], c(collateral, int64(amount)), c("eurx", int64(debt)))
 		suite.NoError(err)
 		c, f := suite.keeper.GetCDP(suite.ctx, collateral, uint64(j+1))
 		suite.True(f)

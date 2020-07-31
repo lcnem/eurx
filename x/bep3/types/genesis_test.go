@@ -7,8 +7,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/lcnem/jpyx/app"
-	"github.com/lcnem/jpyx/x/bep3/types"
+	"github.com/lcnem/eurx/app"
+	"github.com/lcnem/eurx/x/bep3/types"
 )
 
 type GenesisTestSuite struct {

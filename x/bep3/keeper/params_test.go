@@ -11,9 +11,9 @@ import (
 	abci "github.com/tendermint/tendermint/abci/types"
 	tmtime "github.com/tendermint/tendermint/types/time"
 
-	"github.com/lcnem/jpyx/app"
-	"github.com/lcnem/jpyx/x/bep3/keeper"
-	"github.com/lcnem/jpyx/x/bep3/types"
+	"github.com/lcnem/eurx/app"
+	"github.com/lcnem/eurx/x/bep3/keeper"
+	"github.com/lcnem/eurx/x/bep3/types"
 )
 
 type ParamsTestSuite struct {

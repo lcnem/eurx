@@ -12,7 +12,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/lcnem/jpyx/x/pricefeed/types"
+	"github.com/lcnem/eurx/x/pricefeed/types"
 )
 
 func makeTestCodec() (cdc *codec.Codec) {

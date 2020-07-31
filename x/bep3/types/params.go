@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	bech32MainPrefix = "jpyx"
+	bech32MainPrefix = "eurx"
 )
 
 // Parameter keys
@@ -80,7 +80,7 @@ func NewParams(bnbDeputyAddress sdk.AccAddress, bnbDeputyFixedFee, minAmount,
 
 // DefaultParams returns default params for bep3 module
 func DefaultParams() Params {
-	defaultBnbDeputyAddress, err := sdk.AccAddressFromBech32("jpyx1s7gmzmjp5vlffawk9xch0cw9f4es06u9wn9hwq")
+	defaultBnbDeputyAddress, err := sdk.AccAddressFromBech32("eurx1s7gmzmjp5vlffawk9xch0cw9f4es06u9wn9hwq")
 	if err != nil {
 		panic(err)
 	}

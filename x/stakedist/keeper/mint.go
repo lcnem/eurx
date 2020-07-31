@@ -3,8 +3,8 @@ package keeper
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	cdptypes "github.com/lcnem/jpyx/x/cdp/types"
-	"github.com/lcnem/jpyx/x/stakedist/types"
+	cdptypes "github.com/lcnem/eurx/x/cdp/types"
+	"github.com/lcnem/eurx/x/stakedist/types"
 )
 
 // MintPeriodInflation mints new tokens according to the inflation schedule specified in the parameters

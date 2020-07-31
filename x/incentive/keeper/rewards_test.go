@@ -8,10 +8,10 @@ import (
 	abci "github.com/tendermint/tendermint/abci/types"
 	tmtime "github.com/tendermint/tendermint/types/time"
 
-	"github.com/lcnem/jpyx/app"
-	"github.com/lcnem/jpyx/x/cdp"
-	"github.com/lcnem/jpyx/x/incentive/types"
-	"github.com/lcnem/jpyx/x/pricefeed"
+	"github.com/lcnem/eurx/app"
+	"github.com/lcnem/eurx/x/cdp"
+	"github.com/lcnem/eurx/x/incentive/types"
+	"github.com/lcnem/eurx/x/pricefeed"
 )
 
 func (suite *KeeperTestSuite) TestExpireRewardPeriod() {
@@ -100,7 +100,7 @@ func (suite *KeeperTestSuite) TestCreateAndDeleteRewardsPeriods() {
 }
 
 func (suite *KeeperTestSuite) TestApplyRewardsToCdps() {
-	suite.setupCdpChain() // creates a test app with 3 BNB cdps and jpyx incentives for bnb - each reward period is one week
+	suite.setupCdpChain() // creates a test app with 3 BNB cdps and eurx incentives for bnb - each reward period is one week
 
 	// move the context forward by 100 periods
 	suite.ctx = suite.ctx.WithBlockTime(suite.ctx.BlockTime().Add(time.Second * 100))
@@ -153,8 +153,8 @@ func (suite *KeeperTestSuite) TestApplyRewardsToCdps() {
 func (suite *KeeperTestSuite) setupCdpChain() {
 	// creates a new test app with bnb as the only asset the pricefeed and cdp modules
 	// funds three addresses and creates 3 cdps, funded with 100 BNB, 1000 BNB, and 10000 BNB
-	// each CDP draws 10, 100, and 1000 JPYX respectively
-	// adds jpyx incentives for bnb - 1000 KAVA per week with a 1 year time lock
+	// each CDP draws 10, 100, and 1000 EURX respectively
+	// adds eurx incentives for bnb - 1000 KAVA per week with a 1 year time lock
 
 	tApp := app.NewTestApp()
 	ctx := tApp.NewContext(true, abci.Header{Height: 1, Time: tmtime.Now()})
@@ -162,12 +162,12 @@ func (suite *KeeperTestSuite) setupCdpChain() {
 	pricefeedGS := pricefeed.GenesisState{
 		Params: pricefeed.Params{
 			Markets: []pricefeed.Market{
-				{MarketID: "bnb:jpy", BaseAsset: "bnb", QuoteAsset: "jpy", Oracles: []sdk.AccAddress{}, Active: true},
+				{MarketID: "bnb:eur", BaseAsset: "bnb", QuoteAsset: "eur", Oracles: []sdk.AccAddress{}, Active: true},
 			},
 		},
 		PostedPrices: []pricefeed.PostedPrice{
 			{
-				MarketID:      "bnb:jpy",
+				MarketID:      "bnb:eur",
 				OracleAddress: sdk.AccAddress{},
 				Price:         d("12.29"),
 				Expiry:        time.Now().Add(100000 * time.Hour),
@@ -177,7 +177,7 @@ func (suite *KeeperTestSuite) setupCdpChain() {
 	// need incentive params for one collateral
 	cdpGS := cdp.GenesisState{
 		Params: cdp.Params{
-			GlobalDebtLimit:              sdk.NewInt64Coin("jpyx", 1000000000000),
+			GlobalDebtLimit:              sdk.NewInt64Coin("eurx", 1000000000000),
 			SurplusAuctionThreshold:      cdp.DefaultSurplusThreshold,
 			SurplusAuctionLot:            cdp.DefaultSurplusLot,
 			DebtAuctionThreshold:         cdp.DefaultDebtThreshold,
@@ -187,19 +187,19 @@ func (suite *KeeperTestSuite) setupCdpChain() {
 				{
 					Denom:               "bnb",
 					LiquidationRatio:    sdk.MustNewDecFromStr("2.0"),
-					DebtLimit:           sdk.NewInt64Coin("jpyx", 1000000000000),
+					DebtLimit:           sdk.NewInt64Coin("eurx", 1000000000000),
 					StabilityFee:        sdk.MustNewDecFromStr("1.000000001547125958"), // %5 apr
 					LiquidationPenalty:  d("0.05"),
 					AuctionSize:         i(10000000000),
 					Prefix:              0x20,
-					SpotMarketID:        "bnb:jpy",
-					LiquidationMarketID: "bnb:jpy",
+					SpotMarketID:        "bnb:eur",
+					LiquidationMarketID: "bnb:eur",
 					ConversionFactor:    i(8),
 				},
 			},
 			DebtParam: cdp.DebtParam{
-				Denom:            "jpyx",
-				ReferenceAsset:   "jpy",
+				Denom:            "eurx",
+				ReferenceAsset:   "eur",
 				ConversionFactor: i(6),
 				DebtFloor:        i(10000000),
 				SavingsRate:      d("0.95"),
@@ -242,13 +242,13 @@ func (suite *KeeperTestSuite) setupCdpChain() {
 	suite.ctx = ctx
 	// create 3 cdps
 	cdpKeeper := tApp.GetCDPKeeper()
-	err := cdpKeeper.AddCdp(suite.ctx, addrs[0], c("bnb", 10000000000), c("jpyx", 10000000))
+	err := cdpKeeper.AddCdp(suite.ctx, addrs[0], c("bnb", 10000000000), c("eurx", 10000000))
 	suite.Require().NoError(err)
-	err = cdpKeeper.AddCdp(suite.ctx, addrs[1], c("bnb", 100000000000), c("jpyx", 100000000))
+	err = cdpKeeper.AddCdp(suite.ctx, addrs[1], c("bnb", 100000000000), c("eurx", 100000000))
 	suite.Require().NoError(err)
-	err = cdpKeeper.AddCdp(suite.ctx, addrs[2], c("bnb", 1000000000000), c("jpyx", 1000000000))
+	err = cdpKeeper.AddCdp(suite.ctx, addrs[2], c("bnb", 1000000000000), c("eurx", 1000000000))
 	suite.Require().NoError(err)
-	// total jpy is 1110
+	// total eur is 1110
 
 	// set the previous block time
 	suite.keeper.SetPreviousBlockTime(suite.ctx, suite.ctx.BlockTime())

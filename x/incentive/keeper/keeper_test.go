@@ -13,9 +13,9 @@ import (
 	abci "github.com/tendermint/tendermint/abci/types"
 	tmtime "github.com/tendermint/tendermint/types/time"
 
-	"github.com/lcnem/jpyx/app"
-	"github.com/lcnem/jpyx/x/incentive/keeper"
-	"github.com/lcnem/jpyx/x/incentive/types"
+	"github.com/lcnem/eurx/app"
+	"github.com/lcnem/eurx/x/incentive/keeper"
+	"github.com/lcnem/eurx/x/incentive/types"
 )
 
 // Test suite used for all keeper tests

@@ -16,9 +16,9 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/lcnem/jpyx/x/pricefeed/client/cli"
-	"github.com/lcnem/jpyx/x/pricefeed/client/rest"
-	"github.com/lcnem/jpyx/x/pricefeed/simulation"
+	"github.com/lcnem/eurx/x/pricefeed/client/cli"
+	"github.com/lcnem/eurx/x/pricefeed/client/rest"
+	"github.com/lcnem/eurx/x/pricefeed/simulation"
 )
 
 var (

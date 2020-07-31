@@ -11,12 +11,12 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/lcnem/jpyx/app"
-	bep3types "github.com/lcnem/jpyx/x/bep3/types"
-	cdptypes "github.com/lcnem/jpyx/x/cdp/types"
-	"github.com/lcnem/jpyx/x/committee"
-	"github.com/lcnem/jpyx/x/committee/types"
-	"github.com/lcnem/jpyx/x/pricefeed"
+	"github.com/lcnem/eurx/app"
+	bep3types "github.com/lcnem/eurx/x/bep3/types"
+	cdptypes "github.com/lcnem/eurx/x/cdp/types"
+	"github.com/lcnem/eurx/x/committee"
+	"github.com/lcnem/eurx/x/committee/types"
+	"github.com/lcnem/eurx/x/pricefeed"
 )
 
 func newCDPGenesisState(params cdptypes.Params) app.GenesisState {
@@ -41,12 +41,12 @@ func newPricefeedGenState(assets []string, prices []sdk.Dec) app.GenesisState {
 		pfGenesis.Params.Markets = append(
 			pfGenesis.Params.Markets,
 			pricefeed.Market{
-				MarketID: assets[i] + ":jpy", BaseAsset: assets[i], QuoteAsset: "jpy", Oracles: []sdk.AccAddress{}, Active: true,
+				MarketID: assets[i] + ":eur", BaseAsset: assets[i], QuoteAsset: "eur", Oracles: []sdk.AccAddress{}, Active: true,
 			})
 		pfGenesis.PostedPrices = append(
 			pfGenesis.PostedPrices,
 			pricefeed.PostedPrice{
-				MarketID:      assets[i] + ":jpy",
+				MarketID:      assets[i] + ":eur",
 				OracleAddress: sdk.AccAddress{},
 				Price:         prices[i],
 				Expiry:        time.Date(1998, 1, 1, 0, 0, 0, 0, time.UTC),
@@ -88,14 +88,14 @@ func (suite *KeeperTestSuite) TestSubmitProposal() {
 	testCP := cdptypes.CollateralParams{{
 		Denom:               "bnb",
 		LiquidationRatio:    d("1.5"),
-		DebtLimit:           c("jpyx", 1000000000000),
+		DebtLimit:           c("eurx", 1000000000000),
 		StabilityFee:        d("1.000000001547125958"), // %5 apr
 		LiquidationPenalty:  d("0.05"),
 		AuctionSize:         i(100),
 		Prefix:              0x20,
 		ConversionFactor:    i(6),
-		LiquidationMarketID: "bnb:jpy",
-		SpotMarketID:        "bnb:jpy",
+		LiquidationMarketID: "bnb:eur",
+		SpotMarketID:        "bnb:eur",
 	}}
 	testCDPParams := cdptypes.DefaultParams()
 	testCDPParams.CollateralParams = testCP
@@ -103,11 +103,11 @@ func (suite *KeeperTestSuite) TestSubmitProposal() {
 
 	newValidCP := make(cdptypes.CollateralParams, len(testCP))
 	copy(newValidCP, testCP)
-	newValidCP[0].DebtLimit = c("jpyx", 500000000000)
+	newValidCP[0].DebtLimit = c("eurx", 500000000000)
 
 	newInvalidCP := make(cdptypes.CollateralParams, len(testCP))
 	copy(newInvalidCP, testCP)
-	newInvalidCP[0].SpotMarketID = "btc:jpy"
+	newInvalidCP[0].SpotMarketID = "btc:eur"
 
 	testcases := []struct {
 		name        string
@@ -423,7 +423,7 @@ func (suite *KeeperTestSuite) TestValidatePubProposal() {
 				[]params.ParamChange{{
 					Subspace: cdptypes.ModuleName,
 					Key:      string(cdptypes.KeyGlobalDebtLimit),
-					Value:    string(types.ModuleCdc.MustMarshalJSON(c("jpyx", 100000000000))),
+					Value:    string(types.ModuleCdc.MustMarshalJSON(c("eurx", 100000000000))),
 				}},
 			),
 			expectErr: false,
@@ -477,7 +477,7 @@ func (suite *KeeperTestSuite) TestValidatePubProposal() {
 				[]params.ParamChange{{
 					Subspace: cdptypes.ModuleName,
 					Key:      string(cdptypes.KeyGlobalDebtLimit),
-					Value:    `{"denom": "jpyx",`,
+					Value:    `{"denom": "eurx",`,
 				}},
 			),
 			expectErr: true,

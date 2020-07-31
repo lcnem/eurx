@@ -22,7 +22,7 @@ import (
 
 	"github.com/tendermint/tendermint/crypto"
 
-	"github.com/lcnem/jpyx/x/committee/types"
+	"github.com/lcnem/eurx/x/committee/types"
 )
 
 func GetTxCmd(storeKey string, cdc *codec.Codec) *cobra.Command {

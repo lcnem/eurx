@@ -12,9 +12,9 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/lcnem/jpyx/app"
-	"github.com/lcnem/jpyx/x/auction"
-	"github.com/lcnem/jpyx/x/cdp"
+	"github.com/lcnem/eurx/app"
+	"github.com/lcnem/eurx/x/auction"
+	"github.com/lcnem/eurx/x/cdp"
 )
 
 func TestKeeper_BeginBlocker(t *testing.T) {

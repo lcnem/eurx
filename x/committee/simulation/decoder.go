@@ -8,7 +8,7 @@ import (
 
 	"github.com/tendermint/tendermint/libs/kv"
 
-	"github.com/lcnem/jpyx/x/committee/types"
+	"github.com/lcnem/eurx/x/committee/types"
 )
 
 // DecodeStore unmarshals the KVPair's Value to the corresponding module type

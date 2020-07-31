@@ -7,10 +7,10 @@ import (
 	paramstypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	upgrade "github.com/cosmos/cosmos-sdk/x/upgrade"
 
-	bep3types "github.com/lcnem/jpyx/x/bep3/types"
-	cdptypes "github.com/lcnem/jpyx/x/cdp/types"
-	"github.com/lcnem/jpyx/x/pricefeed"
-	pricefeedtypes "github.com/lcnem/jpyx/x/pricefeed/types"
+	bep3types "github.com/lcnem/eurx/x/bep3/types"
+	cdptypes "github.com/lcnem/eurx/x/cdp/types"
+	"github.com/lcnem/eurx/x/pricefeed"
+	pricefeedtypes "github.com/lcnem/eurx/x/pricefeed/types"
 )
 
 func init() {

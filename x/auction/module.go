@@ -17,10 +17,10 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/lcnem/jpyx/x/auction/client/cli"
-	"github.com/lcnem/jpyx/x/auction/client/rest"
-	"github.com/lcnem/jpyx/x/auction/simulation"
-	"github.com/lcnem/jpyx/x/auction/types"
+	"github.com/lcnem/eurx/x/auction/client/cli"
+	"github.com/lcnem/eurx/x/auction/client/rest"
+	"github.com/lcnem/eurx/x/auction/simulation"
+	"github.com/lcnem/eurx/x/auction/types"
 )
 
 var (

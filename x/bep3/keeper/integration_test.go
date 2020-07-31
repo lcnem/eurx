@@ -8,9 +8,9 @@ import (
 	"github.com/tendermint/tendermint/crypto"
 	tmtime "github.com/tendermint/tendermint/types/time"
 
-	"github.com/lcnem/jpyx/app"
-	"github.com/lcnem/jpyx/x/bep3"
-	"github.com/lcnem/jpyx/x/bep3/types"
+	"github.com/lcnem/eurx/app"
+	"github.com/lcnem/eurx/x/bep3"
+	"github.com/lcnem/eurx/x/bep3/types"
 )
 
 const (

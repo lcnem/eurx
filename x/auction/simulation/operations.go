@@ -15,9 +15,9 @@ import (
 	authexported "github.com/cosmos/cosmos-sdk/x/auth/exported"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 
-	appparams "github.com/lcnem/jpyx/app/params"
-	"github.com/lcnem/jpyx/x/auction/keeper"
-	"github.com/lcnem/jpyx/x/auction/types"
+	appparams "github.com/lcnem/eurx/app/params"
+	"github.com/lcnem/eurx/x/auction/keeper"
+	"github.com/lcnem/eurx/x/auction/types"
 )
 
 var (

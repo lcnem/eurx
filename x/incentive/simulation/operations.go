@@ -12,10 +12,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/auth/vesting"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 
-	appparams "github.com/lcnem/jpyx/app/params"
-	"github.com/lcnem/jpyx/x/incentive/keeper"
-	"github.com/lcnem/jpyx/x/incentive/types"
-	stakedist "github.com/lcnem/jpyx/x/stakedist"
+	appparams "github.com/lcnem/eurx/app/params"
+	"github.com/lcnem/eurx/x/incentive/keeper"
+	"github.com/lcnem/eurx/x/incentive/types"
+	stakedist "github.com/lcnem/eurx/x/stakedist"
 )
 
 // Simulation operation weights constants

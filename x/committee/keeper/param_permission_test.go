@@ -10,11 +10,11 @@ import (
 	"github.com/stretchr/testify/suite"
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/lcnem/jpyx/app"
-	bep3types "github.com/lcnem/jpyx/x/bep3/types"
-	cdptypes "github.com/lcnem/jpyx/x/cdp/types"
-	"github.com/lcnem/jpyx/x/committee/types"
-	pricefeedtypes "github.com/lcnem/jpyx/x/pricefeed/types"
+	"github.com/lcnem/eurx/app"
+	bep3types "github.com/lcnem/eurx/x/bep3/types"
+	cdptypes "github.com/lcnem/eurx/x/cdp/types"
+	"github.com/lcnem/eurx/x/committee/types"
+	pricefeedtypes "github.com/lcnem/eurx/x/pricefeed/types"
 )
 
 type PermissionTestSuite struct {
@@ -33,36 +33,36 @@ func (suite *PermissionTestSuite) TestSubParamChangePermission_Allows() {
 		{
 			Denom:               "bnb",
 			LiquidationRatio:    d("2.0"),
-			DebtLimit:           c("jpyx", 1000000000000),
+			DebtLimit:           c("eurx", 1000000000000),
 			StabilityFee:        d("1.000000001547125958"),
 			LiquidationPenalty:  d("0.05"),
 			AuctionSize:         i(100),
 			Prefix:              0x20,
 			ConversionFactor:    i(6),
-			SpotMarketID:        "bnb:jpy",
-			LiquidationMarketID: "bnb:jpy",
+			SpotMarketID:        "bnb:eur",
+			LiquidationMarketID: "bnb:eur",
 		},
 		{
 			Denom:               "btc",
 			LiquidationRatio:    d("1.5"),
-			DebtLimit:           c("jpyx", 1000000000),
+			DebtLimit:           c("eurx", 1000000000),
 			StabilityFee:        d("1.000000001547125958"),
 			LiquidationPenalty:  d("0.10"),
 			AuctionSize:         i(1000),
 			Prefix:              0x30,
 			ConversionFactor:    i(8),
-			SpotMarketID:        "btc:jpy",
-			LiquidationMarketID: "btc:jpy",
+			SpotMarketID:        "btc:eur",
+			LiquidationMarketID: "btc:eur",
 		},
 	}
 	testCPUpdatedDebtLimit := make(cdptypes.CollateralParams, len(testCPs))
 	copy(testCPUpdatedDebtLimit, testCPs)
-	testCPUpdatedDebtLimit[0].DebtLimit = c("jpyx", 5000000)
+	testCPUpdatedDebtLimit[0].DebtLimit = c("eurx", 5000000)
 
 	// cdp DebtParam
 	testDP := cdptypes.DebtParam{
-		Denom:            "jpyx",
-		ReferenceAsset:   "jpy",
+		Denom:            "eurx",
+		ReferenceAsset:   "eur",
 		ConversionFactor: i(6),
 		DebtFloor:        i(10000000),
 		SavingsRate:      d("0.95"),
@@ -102,16 +102,16 @@ func (suite *PermissionTestSuite) TestSubParamChangePermission_Allows() {
 	// pricefeed Markets
 	testMs := pricefeedtypes.Markets{
 		{
-			MarketID:   "bnb:jpy",
+			MarketID:   "bnb:eur",
 			BaseAsset:  "bnb",
-			QuoteAsset: "jpy",
+			QuoteAsset: "eur",
 			Oracles:    []sdk.AccAddress{},
 			Active:     true,
 		},
 		{
-			MarketID:   "btc:jpy",
+			MarketID:   "btc:eur",
 			BaseAsset:  "btc",
-			QuoteAsset: "jpy",
+			QuoteAsset: "eur",
 			Oracles:    []sdk.AccAddress{},
 			Active:     true,
 		},
@@ -166,10 +166,10 @@ func (suite *PermissionTestSuite) TestSubParamChangePermission_Allows() {
 				},
 				AllowedMarkets: types.AllowedMarkets{
 					{
-						MarketID: "bnb:jpy",
+						MarketID: "bnb:eur",
 					},
 					{
-						MarketID: "btc:jpy",
+						MarketID: "btc:eur",
 						Active:   true,
 					},
 				},

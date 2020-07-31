@@ -29,14 +29,14 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/supply"
 	"github.com/cosmos/cosmos-sdk/x/upgrade"
 
-	"github.com/lcnem/jpyx/x/auction"
-	"github.com/lcnem/jpyx/x/bep3"
-	"github.com/lcnem/jpyx/x/cdp"
-	"github.com/lcnem/jpyx/x/committee"
-	"github.com/lcnem/jpyx/x/incentive"
-	"github.com/lcnem/jpyx/x/pricefeed"
-	stakedist "github.com/lcnem/jpyx/x/stakedist"
-	validatorvesting "github.com/lcnem/jpyx/x/validator-vesting"
+	"github.com/lcnem/eurx/x/auction"
+	"github.com/lcnem/eurx/x/bep3"
+	"github.com/lcnem/eurx/x/cdp"
+	"github.com/lcnem/eurx/x/committee"
+	"github.com/lcnem/eurx/x/incentive"
+	"github.com/lcnem/eurx/x/pricefeed"
+	stakedist "github.com/lcnem/eurx/x/stakedist"
+	validatorvesting "github.com/lcnem/eurx/x/validator-vesting"
 )
 
 // TestApp is a simple wrapper around an App. It exposes internal keepers for use in integration tests.

@@ -56,9 +56,9 @@ build_tags_comma_sep := $(subst $(whitespace),$(comma),$(build_tags))
 
 # process linker flags
 
-ldflags = -X github.com/cosmos/cosmos-sdk/version.Name=jpyx \
-		  -X github.com/cosmos/cosmos-sdk/version.ServerName=jpyxd \
-		  -X github.com/cosmos/cosmos-sdk/version.ClientName=jpyxcli \
+ldflags = -X github.com/cosmos/cosmos-sdk/version.Name=eurx \
+		  -X github.com/cosmos/cosmos-sdk/version.ServerName=eurxd \
+		  -X github.com/cosmos/cosmos-sdk/version.ClientName=eurxcli \
 		  -X github.com/cosmos/cosmos-sdk/version.Version=$(VERSION) \
 		  -X github.com/cosmos/cosmos-sdk/version.Commit=$(COMMIT) \
 		  -X "github.com/cosmos/cosmos-sdk/version.BuildTags=$(build_tags_comma_sep)"
@@ -76,19 +76,19 @@ all: install
 
 build: go.sum
 ifeq ($(OS), Windows_NT)
-	go build -mod=readonly $(BUILD_FLAGS) -o build/$(DETECTED_OS)/jpyxd.exe ./cmd/jpyxd
-	go build -mod=readonly $(BUILD_FLAGS) -o build/$(DETECTED_OS)/jpyxcli.exe ./cmd/jpyxcli
+	go build -mod=readonly $(BUILD_FLAGS) -o build/$(DETECTED_OS)/eurxd.exe ./cmd/eurxd
+	go build -mod=readonly $(BUILD_FLAGS) -o build/$(DETECTED_OS)/eurxcli.exe ./cmd/eurxcli
 else
-	go build -mod=readonly $(BUILD_FLAGS) -o build/$(DETECTED_OS)/jpyxd ./cmd/jpyxd
-	go build -mod=readonly $(BUILD_FLAGS) -o build/$(DETECTED_OS)/jpyxcli ./cmd/jpyxcli
+	go build -mod=readonly $(BUILD_FLAGS) -o build/$(DETECTED_OS)/eurxd ./cmd/eurxd
+	go build -mod=readonly $(BUILD_FLAGS) -o build/$(DETECTED_OS)/eurxcli ./cmd/eurxcli
 endif
 
 build-linux: go.sum
 	LEDGER_ENABLED=false GOOS=linux GOARCH=amd64 DETECTED_OS=linux $(MAKE) build
 
 install: go.sum
-	go install -mod=readonly $(BUILD_FLAGS) ./cmd/jpyxd
-	go install -mod=readonly $(BUILD_FLAGS) ./cmd/jpyxcli
+	go install -mod=readonly $(BUILD_FLAGS) ./cmd/eurxd
+	go install -mod=readonly $(BUILD_FLAGS) ./cmd/eurxcli
 
 ########################################
 ### Tools & dependencies
@@ -119,19 +119,19 @@ format:
 	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -name '*.pb.go' | xargs misspell -w
 	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -name '*.pb.go' | xargs goimports -w -local github.com/tendermint
 	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -name '*.pb.go' | xargs goimports -w -local github.com/cosmos/cosmos-sdk
-	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -name '*.pb.go' | xargs goimports -w -local github.com/lcnem/jpyx
+	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -name '*.pb.go' | xargs goimports -w -local github.com/lcnem/eurx
 .PHONY: format
 
 ###############################################################################
 ###                                Localnet                                 ###
 ###############################################################################
 
-build-docker-local-jpyx:
+build-docker-local-eurx:
 	@$(MAKE) -C networks/local
 
 # Run a 4-node testnet locally
 localnet-start: build-linux localnet-stop
-	@if ! [ -f build/node0/jpyxd/config/genesis.json ]; then docker run --rm -v $(CURDIR)/build:/jpyxd:Z lcnem/jpyxnode testnet --v 4 -o . --starting-ip-address 192.168.10.2 --keyring-backend=test ; fi
+	@if ! [ -f build/node0/eurxd/config/genesis.json ]; then docker run --rm -v $(CURDIR)/build:/eurxd:Z lcnem/eurxnode testnet --v 4 -o . --starting-ip-address 192.168.10.2 --keyring-backend=test ; fi
 	docker-compose up -d
 
 localnet-stop:
@@ -171,7 +171,7 @@ test-rest:
 
 # Run cli integration tests
 # `-p 4` to use 4 cores, `-tags cli_test` to tell go not to ignore the cli package
-# These tests use the `jpyxd` or `jpyxcli` binaries in the build dir, or in `$BUILDDIR` if that env var is set.
+# These tests use the `eurxd` or `eurxcli` binaries in the build dir, or in `$BUILDDIR` if that env var is set.
 test-cli: build
 	@go test ./cli_test -tags cli_test -v -p 4
 
@@ -179,15 +179,15 @@ test-cli: build
 # This submits an AWS Batch job to run a lot of sims, each within a docker image. Results are uploaded to S3
 start-remote-sims:
 	# build the image used for running sims in, and tag it
-	docker build -f simulations/Dockerfile -t lcnem/jpyx-sim:master .
+	docker build -f simulations/Dockerfile -t lcnem/eurx-sim:master .
 	# push that image to the hub
-	docker push lcnem/jpyx-sim:master
+	docker push lcnem/eurx-sim:master
 	# submit an array job on AWS Batch, using 1000 seeds, spot instances
 	aws batch submit-job \
 		-—job-name "master-$(VERSION)" \
 		-—job-queue “simulation-1-queue-spot" \
 		-—array-properties size=1000 \
-		-—job-definition jpyx-sim-master \
+		-—job-definition eurx-sim-master \
 		-—container-override environment=[{SIM_NAME=master-$(VERSION)}]
 
 .PHONY: all build-linux install clean build test test-cli test-all test-rest test-basic start-remote-sims

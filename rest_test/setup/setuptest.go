@@ -24,13 +24,13 @@ import (
 
 	tmtime "github.com/tendermint/tendermint/types/time"
 
-	"github.com/lcnem/jpyx/app"
-	"github.com/lcnem/jpyx/x/cdp"
-	"github.com/lcnem/jpyx/x/pricefeed"
+	"github.com/lcnem/eurx/app"
+	"github.com/lcnem/eurx/x/cdp"
+	"github.com/lcnem/eurx/x/pricefeed"
 )
 
 func init() {
-	version.Name = "jpyx"
+	version.Name = "eurx"
 	config := sdk.GetConfig()
 	app.SetBech32AddressPrefixes(config)
 	config.Seal()
@@ -84,7 +84,7 @@ func sendMsgPostPrice() {
 	// from, assetcode, price, expiry
 	msg := pricefeed.NewMsgPostPrice(
 		addr,
-		"btc:jpy",
+		"btc:eur",
 		price,
 		expiry,
 	)
@@ -119,7 +119,7 @@ func sendBtcCdp() {
 	msg := cdp.NewMsgCreateCDP(
 		addr,
 		sdk.NewInt64Coin("btc", 200000000),
-		sdk.NewInt64Coin("jpyx", 10000000),
+		sdk.NewInt64Coin("eurx", 10000000),
 	)
 
 	// helper methods for transactions
@@ -152,7 +152,7 @@ func sendXrpCdp() {
 	msg := cdp.NewMsgCreateCDP(
 		addr,
 		sdk.NewInt64Coin("xrp", 200000000),
-		sdk.NewInt64Coin("jpyx", 10000000),
+		sdk.NewInt64Coin("eurx", 10000000),
 	)
 
 	// helper methods for transactions
@@ -271,7 +271,7 @@ func sendCoins() {
 		panic(err)
 	}
 
-	addrTo, err := sdk.AccAddressFromBech32("jpyx1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz") // Note: must match the faucet address
+	addrTo, err := sdk.AccAddressFromBech32("eurx1ls82zzghsx0exkpr52m8vht5jqs3un0ceysshz") // Note: must match the faucet address
 	if err != nil {
 		panic(err)
 	}
@@ -297,7 +297,7 @@ func sendCoins() {
 
 func getTestAddress() (address string) {
 	// the test address - Note: this must match with startchain.sh
-	address = "jpyx1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c"
+	address = "eurx1ffv7nhd3z6sych2qpqkk03ec6hzkmufy0r2s4c"
 	return address
 }
 
@@ -326,7 +326,7 @@ func sendDelegation() {
 	keybase := getKeybase()
 
 	// get the validator address for delegation
-	valAddr, err := sdk.ValAddressFromBech32("jpyvaloper1ffv7nhd3z6sych2qpqkk03ec6hzkmufyz4scd0") // **FAUCET**
+	valAddr, err := sdk.ValAddressFromBech32("eurvaloper1ffv7nhd3z6sych2qpqkk03ec6hzkmufyz4scd0") // **FAUCET**
 	if err != nil {
 		panic(err)
 	}
@@ -359,7 +359,7 @@ func sendUndelegation() {
 	keybase := getKeybase()
 
 	// get the validator address for delegation
-	valAddr, err := sdk.ValAddressFromBech32("jpyvaloper1ffv7nhd3z6sych2qpqkk03ec6hzkmufyz4scd0") // **FAUCET**
+	valAddr, err := sdk.ValAddressFromBech32("eurvaloper1ffv7nhd3z6sych2qpqkk03ec6hzkmufyz4scd0") // **FAUCET**
 	if err != nil {
 		panic(err)
 	}

@@ -1,4 +1,4 @@
-module github.com/lcnem/jpyx
+module github.com/lcnem/eurx
 
 go 1.14
 

@@ -1,12 +1,12 @@
 #!/usr/bin/env sh
 
-BINARY=/jpyxd/linux/${BINARY:-jpyxd}
+BINARY=/eurxd/linux/${BINARY:-eurxd}
 echo "binary: ${BINARY}"
 ID=${ID:-0}
-LOG=${LOG:-jpyxd.log}
+LOG=${LOG:-eurxd.log}
 
 if ! [ -f "${BINARY}" ]; then
-	echo "The binary $(basename "${BINARY}") cannot be found. Please add the binary to the shared folder. Please use the BINARY environment variable if the name of the binary is not 'jpyxd' E.g.: -e BINARY=jpyxd_my_test_version"
+	echo "The binary $(basename "${BINARY}") cannot be found. Please add the binary to the shared folder. Please use the BINARY environment variable if the name of the binary is not 'eurxd' E.g.: -e BINARY=eurxd_my_test_version"
 	exit 1
 fi
 
@@ -17,10 +17,10 @@ if [ -z "${BINARY_CHECK}" ]; then
 	exit 1
 fi
 
-export JPYXDHOME="/jpyxd/node${ID}/jpyxd"
+export EURXDHOME="/eurxd/node${ID}/eurxd"
 
-if [ -d "$(dirname "${JPYXDHOME}"/"${LOG}")" ]; then
-  "${BINARY}" --home "${JPYXDHOME}" "$@" | tee "${JPYXDHOME}/${LOG}"
+if [ -d "$(dirname "${EURXDHOME}"/"${LOG}")" ]; then
+  "${BINARY}" --home "${EURXDHOME}" "$@" | tee "${EURXDHOME}/${LOG}"
 else
-  "${BINARY}" --home "${JPYXDHOME}" "$@"
+  "${BINARY}" --home "${EURXDHOME}" "$@"
 fi
