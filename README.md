@@ -46,7 +46,7 @@ eurxcli config trust-node true
 vi /etc/systemd/system/eurxd.service
 ```
 
-```toml
+```txt
 [Unit]
 Description=EURX Node
 After=network-online.target
@@ -72,7 +72,7 @@ systemctl enable eurxd
 vi /etc/systemd/system/eurxrest.service
 ```
 
-```toml
+```txt
 [Unit]
 Description=EURX Rest
 After=network-online.target
