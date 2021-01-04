@@ -1,48 +1,73 @@
-# EURX documentation
+# EURX
 
-## Environment
+## Install
+
+### Environment setup
 
 This is an example for Ubuntu.
 
-```shell
-apt update
-apt install build-essential
+```bash
+sudo apt install docker.io
+sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+
+sudo gpasswd -a $(whoami) docker
+sudo chgrp docker /var/run/docker.sock
+sudo systemctl enable docker
+sudo systemctl restart docker
+```
+
+### Main
+
+```bash
+git clone https://github.com/lcnem/eurx.git
+cd eurx
+cp .env.example .env
+vi .env
+docker-compose up -d
+```
+
+## Deprecated way of Installation
+
+### Environment setup
+
+This is an example for Ubuntu.
+
+```bash
+sudo apt update
+sudo apt install build-essential
 cd ~
-wget https://dl.google.com/go/go1.14.linux-amd64.tar.gz
-tar -C /usr/local -xzf go1.14.linux-amd64.tar.gz
+wget https://dl.google.com/go/go1.15.6.linux-amd64.tar.gz
+sudo tar -C /usr/local -xzf go1.15.6.linux-amd64.tar.gz
 echo export PATH='$PATH:/usr/local/go/bin:$HOME/go/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-## Install
+### Clone
 
-```shell
-mkdir -p /usr/local/src/github.com/lcnem
-cd /usr/local/src/github.com/lcnem
+```bash
 git clone https://github.com/lcnem/eurx.git
 cd eurx
-git checkout v0.1.0
 make install
 ```
 
-## Setup genesis.json
+### Config daemon
 
-```shell
+```bash
 eurxd init [moniker] --chain-id eurx-1
-cd /usr/local/src/github.com/lcnem/eurx
 cp launch/genesis.json ~/.eurxd/config/genesis.json
 ```
 
-## Setup services
+### Config cli
 
-```shell
+```bash
 eurxcli config chain-id eurx-1
 eurxcli config trust-node true
 ```
 
-### Daemon service
+### Register daemon service
 
-```shell
+```bash
 vi /etc/systemd/system/eurxd.service
 ```
 
@@ -62,13 +87,13 @@ LimitNOFILE=4096
 WantedBy=multi-user.target
 ```
 
-```shell
+```bash
 systemctl enable eurxd
 ```
 
-### REST service
+### Register daemon service
 
-```shell
+```bash
 vi /etc/systemd/system/eurxrest.service
 ```
 
@@ -88,6 +113,15 @@ LimitNOFILE=4096
 WantedBy=multi-user.target
 ```
 
-```shell
+```bash
 systemctl enable eurxrest
 ```
+
+## License
+
+Forked from [Kava](github.com/Kava-Labs/kava).
+Thanks Kava Team.
+
+Copyright © LCNEM, Inc. All rights reserved.
+
+Licensed under the [Apache v2 License](LICENSE.md).
