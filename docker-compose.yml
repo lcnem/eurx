@@ -3,7 +3,7 @@ version: "3"
 services:
   eurxd:
     container_name: eurxd
-    image: eurx
+    image: lcnem/eurx
     volumes:
       - ~/.eurxd:/root/.eurxd
       - ~/.eurxcli:/root/.eurxcli
@@ -16,7 +16,7 @@ services:
        - 26657:26657
   eurxcli:
     container_name: eurxcli
-    image: eurx
+    image: lcnem/eurx
     depends_on:
       - eurxd
     volumes:
@@ -40,8 +40,8 @@ services:
     networks:
       - default
   pricefeed:
-    container_name: pricefeed
-    image: pricefeed
+    container_name: botany-pricefeed
+    image: lcnem/botany-pricefeed
     depends_on:
       - eurxcli
     env_file:
