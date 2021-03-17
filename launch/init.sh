@@ -42,6 +42,7 @@ docker build -t eurx ../
 docker run -v ~/.eurxd:/root/.eurxd -v ~/.eurxcli:/root/.eurxcli -it eurx eurxd init eurx --chain-id "$CHAIN_ID"
 docker run -v ~/.eurxd:/root/.eurxd -v ~/.eurxcli:/root/.eurxcli -it eurx eurxcli config chain-id "$CHAIN_ID"
 docker run -v ~/.eurxd:/root/.eurxd -v ~/.eurxcli:/root/.eurxcli -it eurx eurxcli config trust-node true
+
 add_key "$VALIDATOR_NAME" "$VALIDATOR_MNEMONIC" "$KEY_PASSPHRASE"
 
 KEY_EXISTS=$(jq ".app_state.pricefeed.params.markets[0].oracles | contains([\"$VALIDATOR_ADDRESS\"])" ./genesis.json)
