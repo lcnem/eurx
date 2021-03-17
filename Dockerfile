@@ -23,5 +23,5 @@ COPY . .
 #ENV LEDGER_ENABLED False
 RUN make install
 
-# Run eurxd by default, omit entrypoint to ease using container with kvcli
+# Run eurxd by default, omit entrypoint to ease using container with eurxcli
 CMD ["eurxd"]

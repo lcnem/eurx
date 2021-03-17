@@ -12,8 +12,8 @@ services:
       default:
         ipv4_address: 192.168.10.1
     ports:
-       - 26656:26656
-       - 26657:26657
+      - 26656:26656
+      - 26657:26657
     restart: always
   eurxcli:
     container_name: eurxcli

@@ -52,6 +52,6 @@ else
   sudo cp ./genesis.json ~/.eurxd/config/genesis.json
 fi
 
-docker run -v ~/.eurxd:/root/.eurxd -v ~/.eurxcli:/root/.eurxcli -it eurx eurxd add-genesis-account $VALIDATOR_ADDRESS "500000000000ujsmn,500000000000token"
-gen_tx "500000000000ujsmn" "$VALIDATOR_NAME" "/root/.eurxd/config/gentx/gentx-validator.json"  "$KEY_PASSPHRASE"
+docker run -v ~/.eurxd:/root/.eurxd -v ~/.eurxcli:/root/.eurxcli -it eurx eurxd add-genesis-account $VALIDATOR_ADDRESS "500000000000uestm,500000000000token"
+gen_tx "500000000000uestm" "$VALIDATOR_NAME" "/root/.eurxd/config/gentx/gentx-validator.json"  "$KEY_PASSPHRASE"
 docker run -v ~/.eurxd:/root/.eurxd -v ~/.eurxcli:/root/.eurxcli -it eurx eurxd collect-gentxs
