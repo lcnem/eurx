@@ -42,6 +42,7 @@ docker build -t eurx ../
 docker run -v ~/.eurxd:/root/.eurxd -v ~/.eurxcli:/root/.eurxcli -it eurx eurxd init eurx --chain-id "$CHAIN_ID"
 docker run -v ~/.eurxd:/root/.eurxd -v ~/.eurxcli:/root/.eurxcli -it eurx eurxcli config chain-id "$CHAIN_ID"
 docker run -v ~/.eurxd:/root/.eurxd -v ~/.eurxcli:/root/.eurxcli -it eurx eurxcli config trust-node true
+
 add_key "$VALIDATOR_NAME" "$VALIDATOR_MNEMONIC" "$KEY_PASSPHRASE"
 
 KEY_EXISTS=$(jq ".app_state.pricefeed.params.markets[0].oracles | contains([\"$VALIDATOR_ADDRESS\"])" ./genesis.json)
@@ -52,6 +53,6 @@ else
   sudo cp ./genesis.json ~/.eurxd/config/genesis.json
 fi
 
-docker run -v ~/.eurxd:/root/.eurxd -v ~/.eurxcli:/root/.eurxcli -it eurx eurxd add-genesis-account $VALIDATOR_ADDRESS "500000000000ujsmn,500000000000token"
-gen_tx "500000000000ujsmn" "$VALIDATOR_NAME" "/root/.eurxd/config/gentx/gentx-validator.json"  "$KEY_PASSPHRASE"
+docker run -v ~/.eurxd:/root/.eurxd -v ~/.eurxcli:/root/.eurxcli -it eurx eurxd add-genesis-account $VALIDATOR_ADDRESS "500000000000uestm,500000000000token"
+gen_tx "500000000000uestm" "$VALIDATOR_NAME" "/root/.eurxd/config/gentx/gentx-validator.json"  "$KEY_PASSPHRASE"
 docker run -v ~/.eurxd:/root/.eurxd -v ~/.eurxcli:/root/.eurxcli -it eurx eurxd collect-gentxs
