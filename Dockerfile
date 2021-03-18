@@ -1,7 +1,7 @@
 # Simple usage with a mounted data directory:
 # > docker build -t eurx .
-# > docker run -it -p 46657:46657 -p 46656:46656 -v ~/.eurx:/eurx/.eurx eurx eurxd init
-# > docker run -it -p 46657:46657 -p 46656:46656 -v ~/.eurx:/eurx/.eurx eurx eurxd start
+# > docker run -it -p 26656:26656 -p 26657:26657 -v ~/.eurx:/root/.eurx eurx eurxd init
+# > docker run -it -p 26656:26656 -p 26657:26657 -v ~/.eurx:/root/.eurx eurx eurxd start
 FROM golang:1.16-alpine AS build-env
 
 # Set up dependencies
@@ -22,17 +22,10 @@ RUN apk add --no-cache $PACKAGES && \
 # Final image
 FROM alpine:edge
 
-ENV EURX /eurx
-
 # Install ca-certificates
 RUN apk add --update ca-certificates
 
-RUN addgroup eurx && \
-  adduser -S -G eurx eurx -h "$EURX"
-
-USER eurx
-
-WORKDIR $EURX
+WORKDIR /root
 
 # Copy over binaries from the build-env
 COPY --from=build-env /go/bin/eurxd /usr/bin/eurxd
