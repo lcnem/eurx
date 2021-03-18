@@ -1,27 +1,41 @@
-FROM golang:alpine AS build-env
+# Simple usage with a mounted data directory:
+# > docker build -t eurx .
+# > docker run -it -p 46657:46657 -p 46656:46656 -v ~/.eurx:/eurx/.eurx eurx eurxd init
+# > docker run -it -p 46657:46657 -p 46656:46656 -v ~/.eurx:/eurx/.eurx eurx eurxd start
+FROM golang:1.16-alpine AS build-env
 
 # Set up dependencies
-# bash for debugging
-# git, make for installation
-# libc-dev, gcc, linux-headers, eudev-dev are used for cgo and ledger installation (possibly)
-RUN apk add bash git make libc-dev gcc linux-headers eudev-dev jq
-
+ENV PACKAGES curl make git libc-dev bash gcc linux-headers eudev-dev python3
 
 # Set working directory for the build
-WORKDIR /root/eurx
-# default home directory is /root
-
-COPY go.mod .
-COPY go.sum .
-
-RUN go mod download
+WORKDIR /go/src/github.com/lcnem/eurx
 
 # Add source files
 COPY . .
 
-# Install eurxd, eurxcli
-#ENV LEDGER_ENABLED False
-RUN make install
+RUN go version
+
+# Install minimum necessary dependencies, build Cosmos SDK, remove packages
+RUN apk add --no-cache $PACKAGES && \
+  make install
+
+# Final image
+FROM alpine:edge
+
+ENV EURX /eurx
+
+# Install ca-certificates
+RUN apk add --update ca-certificates
+
+RUN addgroup eurx && \
+  adduser -S -G eurx eurx -h "$EURX"
+
+USER eurx
+
+WORKDIR $EURX
+
+# Copy over binaries from the build-env
+COPY --from=build-env /go/bin/eurxd /usr/bin/eurxd
 
 # Run eurxd by default, omit entrypoint to ease using container with eurxcli
 CMD ["eurxd"]
