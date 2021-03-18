@@ -67,4 +67,5 @@ jq ".app_state.cdp.params.global_debt_limit.amount |= \"2000000000000\"" $GENESI
 jq ".app_state.incentive.params.active |= true" $GENESIS_FILE_NAME > $GENESIS_TMP_FILE_NAME && mv $GENESIS_TMP_FILE_NAME $GENESIS_FILE_NAME
 jq ".app_state.incentive.params.rewards += [{\"active\":true,\"denom\":\"bnb\",\"available_rewards\":{\"amount\":\"50000000000\",\"denom\":\"$DENOM\"},\"duration\":\"36288000000000000\",\"time_lock\":\"1892160000000000000\",\"claim_duration\":\"36288000000000000\"}]" $GENESIS_FILE_NAME > $GENESIS_TMP_FILE_NAME && mv $GENESIS_TMP_FILE_NAME $GENESIS_FILE_NAME
 jq ".app_state.pricefeed.params.markets += [{\"active\":true,\"base_asset\":\"bnb\",\"market_id\":\"bnb:eur\",\"oracles\":[],\"quote_asset\":\"eur\"},{\"active\":true,\"base_asset\":\"bnb\",\"market_id\":\"bnb:eur:30\",\"oracles\":[],\"quote_asset\":\"eur\"}]" $GENESIS_FILE_NAME > $GENESIS_TMP_FILE_NAME && mv $GENESIS_TMP_FILE_NAME $GENESIS_FILE_NAME
+# Add validator address to oracles
 jq ".app_state.pricefeed.params.markets[].oracles += [\"$VALIDATOR_ADDRESS\"]" $GENESIS_FILE_NAME > $GENESIS_TMP_FILE_NAME && mv $GENESIS_TMP_FILE_NAME $GENESIS_FILE_NAME

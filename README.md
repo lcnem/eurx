@@ -7,7 +7,7 @@
 This is an example for Ubuntu.
 
 ```bash
-sudo apt install docker.io
+sudo apt install docker.io -y
 sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
@@ -17,13 +17,13 @@ sudo systemctl enable docker
 sudo systemctl restart docker
 ```
 
-### Main
+### Join network
 
 ```bash
 git clone https://github.com/lcnem/eurx.git
 cd eurx
-cp .env.example .env
-vi .env
+docker run -v ~/.eurx:/root/.eurx lcnem/eurx:next [moniker] --chain-id [chain-id]
+cp launch/[chain-id]/genesis.json ~/.eurx/config/genesis.json
 docker-compose up -d
 ```
 
@@ -54,15 +54,8 @@ make install
 ### Config daemon
 
 ```bash
-eurxd init [moniker] --chain-id eurx-1
-cp launch/genesis.json ~/.eurxd/config/genesis.json
-```
-
-### Config cli
-
-```bash
-eurxcli config chain-id eurx-1
-eurxcli config trust-node true
+eurxd init [moniker] --chain-id [chain-id]
+cp launch/[chain-id]/genesis.json ~/.eurx/config/genesis.json
 ```
 
 ### Register daemon service
@@ -89,32 +82,6 @@ WantedBy=multi-user.target
 
 ```bash
 systemctl enable eurxd
-```
-
-### Register daemon service
-
-```bash
-vi /etc/systemd/system/eurxrest.service
-```
-
-```txt
-[Unit]
-Description=EURX Rest
-After=network-online.target
-
-[Service]
-User=root
-ExecStart=/root/go/bin/eurxcli rest-server
-Restart=always
-RestartSec=3
-LimitNOFILE=4096
-
-[Install]
-WantedBy=multi-user.target
-```
-
-```bash
-systemctl enable eurxrest
 ```
 
 ## License

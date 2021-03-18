@@ -3,56 +3,21 @@ version: "3"
 services:
   eurxd:
     container_name: eurxd
-    image: lcnem/eurx
+    image: lcnem/eurx:next
     volumes:
-      - ~/.eurxd:/root/.eurxd
-      - ~/.eurxcli:/root/.eurxcli
-    command: eurxd start --rpc.laddr=tcp://0.0.0.0:26657
+      - ~/.eurx:/root/.eurx
+    command: eurxd start \
+      --rpc.laddr=tcp://0.0.0.0:26657 \
+      --api.enable=true \
+      --api.address=tcp://0.0.0.0:1317 \
+      --api.enabled-unsafe-cors=true
     networks:
       default:
         ipv4_address: 192.168.10.1
     ports:
-       - 26656:26656
-       - 26657:26657
-    restart: always
-  eurxcli:
-    container_name: eurxcli
-    image: lcnem/eurx
-    depends_on:
-      - eurxd
-    volumes:
-      - ~/.eurxd:/root/.eurxd
-      - ~/.eurxcli:/root/.eurxcli
-    networks:
-      default:
-        ipv4_address: 192.168.10.2
-    ports:
-      - 13170:1317
-    command: eurxcli rest-server --laddr=tcp://0.0.0.0:1317 --node tcp://192.168.10.1:26657 --trust-node=true
-    restart: always
-  nginx:
-    container_name: nginx
-    image: nginx:1.15
-    depends_on:
-      - eurxcli
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-    ports:
-      - 1317:80
-    networks:
-      - default
-    restart: always
-  pricefeed:
-    container_name: botany-pricefeed
-    image: lcnem/botany-pricefeed
-    depends_on:
-      - eurxcli
-    env_file:
-      - .env
-    environment:
-      LCD_URL: http://192.168.10.2:1317
-    networks:
-      - default
+      - 1317:1317
+      - 26656:26656
+      - 26657:26657
     restart: always
 networks:
   default:
