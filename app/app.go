@@ -358,6 +358,12 @@ func New(
 		app.AccountKeeper,
 		app.BankKeeper,
 	)
+	app.pricefeedKeeper = pricefeedkeeper.NewKeeper(
+		appCodec,
+		keys[pricefeedtypes.StoreKey],
+		keys[pricefeedtypes.MemStoreKey],
+		app.GetSubspace(pricefeedtypes.ModuleName),
+	)
 	cdpKeeper := cdpkeeper.NewKeeper(
 		appCodec,
 		keys[cdptypes.StoreKey],
@@ -385,12 +391,6 @@ func New(
 		app.GetSubspace(estmdisttypes.ModuleName),
 		app.AccountKeeper,
 		app.BankKeeper,
-	)
-	app.pricefeedKeeper = pricefeedkeeper.NewKeeper(
-		appCodec,
-		keys[pricefeedtypes.StoreKey],
-		keys[pricefeedtypes.MemStoreKey],
-		app.GetSubspace(pricefeedtypes.ModuleName),
 	)
 
 	// register the staking hooks
@@ -475,10 +475,10 @@ func New(
 		ibctransfertypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 		auctiontypes.ModuleName,
+		pricefeedtypes.ModuleName,
 		cdptypes.ModuleName,
 		incentivetypes.ModuleName,
 		estmdisttypes.ModuleName,
-		pricefeedtypes.ModuleName,
 	)
 
 	app.mm.RegisterInvariants(&app.CrisisKeeper)
