@@ -1,4 +1,4 @@
-version: "2.1"
+version: "3"
 
 services:
   eurxd:
@@ -6,6 +6,7 @@ services:
     image: lcnem/eurx:next
     ports:
       - 1317:1317
+      - 9090:9090
       - 26656:26656
       - 26657:26657
     volumes:
@@ -15,17 +16,5 @@ services:
       --api.enable=true \
       --api.address=tcp://0.0.0.0:1317 \
       --api.enabled-unsafe-cors=true
-    networks:
-      default:
-        ipv4_address: 192.168.10.1
-        ipv6_address: 2001:3984:3989::10
+    network_mode: host
     restart: always
-networks:
-  default:
-    driver: bridge
-    enable_ipv6: true
-    ipam:
-      driver: default
-      config:
-        - subnet: 192.168.10.0/16
-        - subnet: 2001:3984:3989::/64
