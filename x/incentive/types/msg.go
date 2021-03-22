@@ -8,24 +8,24 @@ import (
 )
 
 // ensure Msg interface compliance at compile time
-var _ sdk.Msg = &MsgClaimEURXMintingReward{}
+var _ sdk.Msg = &MsgClaimEurxMintingReward{}
 
-// NewMsgClaimEURXMintingReward returns a new MsgClaimEURXMintingReward.
-func NewMsgClaimEURXMintingReward(sender sdk.AccAddress, multiplierName string) MsgClaimEURXMintingReward {
-	return MsgClaimEURXMintingReward{
+// NewMsgClaimEurxMintingReward returns a new MsgClaimEurxMintingReward.
+func NewMsgClaimEurxMintingReward(sender sdk.AccAddress, multiplierName string) MsgClaimEurxMintingReward {
+	return MsgClaimEurxMintingReward{
 		Sender:         sender.Bytes(),
 		MultiplierName: multiplierName,
 	}
 }
 
 // Route return the message type used for routing the message.
-func (msg MsgClaimEURXMintingReward) Route() string { return RouterKey }
+func (msg MsgClaimEurxMintingReward) Route() string { return RouterKey }
 
 // Type returns a human-readable string for the message, intended for utilization within tags.
-func (msg MsgClaimEURXMintingReward) Type() string { return "claim_eurx_minting_reward" }
+func (msg MsgClaimEurxMintingReward) Type() string { return "claim_eurx_minting_reward" }
 
 // ValidateBasic does a simple validation check that doesn't require access to state.
-func (msg MsgClaimEURXMintingReward) ValidateBasic() error {
+func (msg MsgClaimEurxMintingReward) ValidateBasic() error {
 	if msg.Sender.AccAddress().Empty() {
 		return sdkerrors.Wrap(sdkerrors.ErrInvalidAddress, "sender address cannot be empty")
 	}
@@ -33,12 +33,12 @@ func (msg MsgClaimEURXMintingReward) ValidateBasic() error {
 }
 
 // GetSignBytes gets the canonical byte representation of the Msg.
-func (msg MsgClaimEURXMintingReward) GetSignBytes() []byte {
+func (msg MsgClaimEurxMintingReward) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(&msg)
 	return sdk.MustSortJSON(bz)
 }
 
 // GetSigners returns the addresses of signers that must sign.
-func (msg MsgClaimEURXMintingReward) GetSigners() []sdk.AccAddress {
+func (msg MsgClaimEurxMintingReward) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{msg.Sender.AccAddress()}
 }

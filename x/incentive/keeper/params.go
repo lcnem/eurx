@@ -17,8 +17,8 @@ func (k Keeper) SetParams(ctx sdk.Context, params types.Params) {
 	k.paramSpace.SetParamSet(ctx, &params)
 }
 
-// GetEURXMintingRewardPeriod returns the reward period with the specified collateral type if it's found in the params
-func (k Keeper) GetEURXMintingRewardPeriod(ctx sdk.Context, collateralType string) (types.RewardPeriod, bool) {
+// GetEurxMintingRewardPeriod returns the reward period with the specified collateral type if it's found in the params
+func (k Keeper) GetEurxMintingRewardPeriod(ctx sdk.Context, collateralType string) (types.RewardPeriod, bool) {
 	params := k.GetParams(ctx)
 	for _, rp := range params.EurxMintingRewardPeriods {
 		if rp.CollateralType == collateralType {

@@ -4,7 +4,7 @@ info:
   description: 'A REST interface for state queries, legacy transactions'
   version: 1.0.0
 paths:
-  /eurx/auction/auctions:
+  /botany/auction/auctions:
     get:
       operationId: AuctionAll
       responses:
@@ -455,7 +455,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/eurx/auction/auctions/{id}':
+  '/botany/auction/auctions/{id}':
     get:
       summary: 'this line is used by starport scaffolding # 2'
       operationId: Auction
@@ -833,7 +833,7 @@ paths:
           format: uint64
       tags:
         - Query
-  /eurx/auction/params:
+  /botany/auction/params:
     get:
       operationId: AuctionParams
       responses:
@@ -1046,7 +1046,7 @@ paths:
                         }
       tags:
         - Query
-  /eurx/cdp/cdps:
+  /botany/cdp/cdps:
     get:
       operationId: CdpAll
       responses:
@@ -1055,7 +1055,7 @@ paths:
           schema:
             type: object
             properties:
-              Cdp:
+              cdp:
                 type: array
                 items:
                   type: object
@@ -1215,7 +1215,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/eurx/cdp/cdps/{id}':
+  '/botany/cdp/cdps/{id}':
     get:
       summary: 'this line is used by starport scaffolding # 2'
       operationId: Cdp
@@ -1225,7 +1225,7 @@ paths:
           schema:
             type: object
             properties:
-              Cdp:
+              cdp:
                 type: object
                 properties:
                   id:
@@ -1319,7 +1319,7 @@ paths:
           type: string
       tags:
         - Query
-  /eurx/cdp/params:
+  /botany/cdp/params:
     get:
       operationId: CdpParams
       responses:
@@ -1621,7 +1621,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /eurx/pricefeed/markets:
+  /botany/pricefeed/markets:
     get:
       summary: 'this line is used by starport scaffolding # 2'
       operationId: MarketAll
@@ -1746,7 +1746,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/eurx/pricefeed/markets/{market_id}/oracles':
+  '/botany/pricefeed/markets/{market_id}/oracles':
     get:
       operationId: OracleAll
       responses:
@@ -1861,7 +1861,7 @@ paths:
           type: boolean
       tags:
         - Query
-  '/eurx/pricefeed/markets/{market_id}/price':
+  '/botany/pricefeed/markets/{market_id}/price':
     get:
       operationId: Price
       responses:
@@ -1906,7 +1906,7 @@ paths:
           type: string
       tags:
         - Query
-  '/eurx/pricefeed/markets/{market_id}/raw_prices':
+  '/botany/pricefeed/markets/{market_id}/raw_prices':
     get:
       operationId: RawPriceAll
       responses:
@@ -2031,7 +2031,7 @@ paths:
           type: boolean
       tags:
         - Query
-  /eurx/pricefeed/params:
+  /botany/pricefeed/params:
     get:
       operationId: PricefeedParams
       responses:
@@ -2084,7 +2084,7 @@ paths:
                       format: byte
       tags:
         - Query
-  /eurx/pricefeed/prices:
+  /botany/pricefeed/prices:
     get:
       operationId: PriceAll
       responses:
@@ -2201,75 +2201,7 @@ paths:
       tags:
         - Query
 definitions:
-  cosmos.base.query.v1beta1.PageRequest:
-    type: object
-    properties:
-      key:
-        type: string
-        format: byte
-        description: |-
-          key is a value returned in PageResponse.next_key to begin
-          querying the next page most efficiently. Only one of offset or key
-          should be set.
-      offset:
-        type: string
-        format: uint64
-        description: |-
-          offset is a numeric offset that can be used when key is unavailable.
-          It is less efficient than using key. Only one of offset or key should
-          be set.
-      limit:
-        type: string
-        format: uint64
-        description: >-
-          limit is the total number of results to be returned in the result
-          page.
-
-          If left empty it will default to a value to be set by each app.
-      count_total:
-        type: boolean
-        description: >-
-          count_total is set to true  to indicate that the result set should
-          include
-
-          a count of the total number of items available for pagination in UIs.
-
-          count_total is only respected when offset is used. It is ignored when
-          key
-
-          is set.
-    description: |-
-      message SomeRequest {
-               Foo some_parameter = 1;
-               PageRequest pagination = 2;
-       }
-    title: |-
-      PageRequest is to be embedded in gRPC request messages for efficient
-      pagination. Ex:
-  cosmos.base.query.v1beta1.PageResponse:
-    type: object
-    properties:
-      next_key:
-        type: string
-        format: byte
-        title: |-
-          next_key is the key to be passed to PageRequest.key to
-          query the next page most efficiently
-      total:
-        type: string
-        format: uint64
-        title: |-
-          total is total number of results available if PageRequest.count_total
-          was set, its value is undefined otherwise
-    description: |-
-      PageResponse is to be embedded in gRPC response messages where the
-      corresponding request message has used PageRequest.
-
-       message SomeResponse {
-               repeated Bar results = 1;
-               PageResponse page = 2;
-       }
-  eurx.auction.Params:
+  botany.auction.Params:
     type: object
     properties:
       max_auction_duration:
@@ -2282,7 +2214,7 @@ definitions:
         type: string
       increment_collateral:
         type: string
-  eurx.auction.QueryAllAuctionResponse:
+  botany.auction.QueryAllAuctionResponse:
     type: object
     properties:
       auctions:
@@ -2474,7 +2406,7 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
-  eurx.auction.QueryGetAuctionResponse:
+  botany.auction.QueryGetAuctionResponse:
     type: object
     properties:
       auction:
@@ -2636,7 +2568,7 @@ definitions:
                 "@type": "type.googleapis.com/google.protobuf.Duration",
                 "value": "1.212s"
               }
-  eurx.auction.QueryParamsResponse:
+  botany.auction.QueryParamsResponse:
     type: object
     properties:
       params:
@@ -2652,6 +2584,74 @@ definitions:
             type: string
           increment_collateral:
             type: string
+  cosmos.base.query.v1beta1.PageRequest:
+    type: object
+    properties:
+      key:
+        type: string
+        format: byte
+        description: |-
+          key is a value returned in PageResponse.next_key to begin
+          querying the next page most efficiently. Only one of offset or key
+          should be set.
+      offset:
+        type: string
+        format: uint64
+        description: |-
+          offset is a numeric offset that can be used when key is unavailable.
+          It is less efficient than using key. Only one of offset or key should
+          be set.
+      limit:
+        type: string
+        format: uint64
+        description: >-
+          limit is the total number of results to be returned in the result
+          page.
+
+          If left empty it will default to a value to be set by each app.
+      count_total:
+        type: boolean
+        description: >-
+          count_total is set to true  to indicate that the result set should
+          include
+
+          a count of the total number of items available for pagination in UIs.
+
+          count_total is only respected when offset is used. It is ignored when
+          key
+
+          is set.
+    description: |-
+      message SomeRequest {
+               Foo some_parameter = 1;
+               PageRequest pagination = 2;
+       }
+    title: |-
+      PageRequest is to be embedded in gRPC request messages for efficient
+      pagination. Ex:
+  cosmos.base.query.v1beta1.PageResponse:
+    type: object
+    properties:
+      next_key:
+        type: string
+        format: byte
+        title: |-
+          next_key is the key to be passed to PageRequest.key to
+          query the next page most efficiently
+      total:
+        type: string
+        format: uint64
+        title: |-
+          total is total number of results available if PageRequest.count_total
+          was set, its value is undefined otherwise
+    description: |-
+      PageResponse is to be embedded in gRPC response messages where the
+      corresponding request message has used PageRequest.
+
+       message SomeResponse {
+               repeated Bar results = 1;
+               PageResponse page = 2;
+       }
   google.protobuf.Any:
     type: object
     properties:
@@ -2981,19 +2981,7 @@ definitions:
                   "@type": "type.googleapis.com/google.protobuf.Duration",
                   "value": "1.212s"
                 }
-  cosmos.base.v1beta1.Coin:
-    type: object
-    properties:
-      denom:
-        type: string
-      amount:
-        type: string
-    description: |-
-      Coin defines a token with a denomination and an amount.
-
-      NOTE: The amount field is an Int which implements the custom method
-      signatures required by gogoproto.
-  eurx.cdp.CDP:
+  botany.cdp.Cdp:
     type: object
     properties:
       id:
@@ -3044,7 +3032,7 @@ definitions:
         format: date-time
       interest_factor:
         type: string
-  eurx.cdp.CollateralParam:
+  botany.cdp.CollateralParam:
     type: object
     properties:
       denom:
@@ -3084,7 +3072,7 @@ definitions:
         type: string
       conversion_factor:
         type: string
-  eurx.cdp.DebtParam:
+  botany.cdp.DebtParam:
     type: object
     properties:
       denom:
@@ -3095,7 +3083,7 @@ definitions:
         type: string
       debt_floor:
         type: string
-  eurx.cdp.Params:
+  botany.cdp.Params:
     type: object
     properties:
       collateral_params:
@@ -3176,10 +3164,10 @@ definitions:
         type: string
       circuit_breaker:
         type: boolean
-  eurx.cdp.QueryAllCdpResponse:
+  botany.cdp.QueryAllCdpResponse:
     type: object
     properties:
-      Cdp:
+      cdp:
         type: array
         items:
           type: object
@@ -3266,10 +3254,10 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
-  eurx.cdp.QueryGetCdpResponse:
+  botany.cdp.QueryGetCdpResponse:
     type: object
     properties:
-      Cdp:
+      cdp:
         type: object
         properties:
           id:
@@ -3329,7 +3317,7 @@ definitions:
             format: date-time
           interest_factor:
             type: string
-  eurx.cdp.QueryParamsResponse:
+  botany.cdp.QueryParamsResponse:
     type: object
     properties:
       params:
@@ -3416,6 +3404,18 @@ definitions:
             type: string
           circuit_breaker:
             type: boolean
+  cosmos.base.v1beta1.Coin:
+    type: object
+    properties:
+      denom:
+        type: string
+      amount:
+        type: string
+    description: |-
+      Coin defines a token with a denomination and an amount.
+
+      NOTE: The amount field is an Int which implements the custom method
+      signatures required by gogoproto.
   eurx.incentive.Multiplier:
     type: object
     properties:
@@ -3617,14 +3617,14 @@ definitions:
                   format: date-time
                 inflation:
                   type: string
-  eurx.pricefeed.CurrentPrice:
+  botany.pricefeed.CurrentPrice:
     type: object
     properties:
       market_id:
         type: string
       price:
         type: string
-  eurx.pricefeed.Market:
+  botany.pricefeed.Market:
     type: object
     properties:
       market_id:
@@ -3639,7 +3639,7 @@ definitions:
           type: string
       active:
         type: boolean
-  eurx.pricefeed.Params:
+  botany.pricefeed.Params:
     type: object
     properties:
       markets:
@@ -3659,7 +3659,7 @@ definitions:
                 type: string
             active:
               type: boolean
-  eurx.pricefeed.PostedPrice:
+  botany.pricefeed.PostedPrice:
     type: object
     properties:
       market_id:
@@ -3671,7 +3671,7 @@ definitions:
       expiry:
         type: string
         format: date-time
-  eurx.pricefeed.QueryAllMarketResponse:
+  botany.pricefeed.QueryAllMarketResponse:
     type: object
     properties:
       markets:
@@ -3716,7 +3716,7 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
-  eurx.pricefeed.QueryAllOracleResponse:
+  botany.pricefeed.QueryAllOracleResponse:
     type: object
     properties:
       oracles:
@@ -3748,7 +3748,7 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
-  eurx.pricefeed.QueryAllPriceResponse:
+  botany.pricefeed.QueryAllPriceResponse:
     type: object
     properties:
       prices:
@@ -3785,7 +3785,7 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
-  eurx.pricefeed.QueryAllRawPriceResponse:
+  botany.pricefeed.QueryAllRawPriceResponse:
     type: object
     properties:
       prices:
@@ -3827,7 +3827,7 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
-  eurx.pricefeed.QueryGetPriceResponse:
+  botany.pricefeed.QueryGetPriceResponse:
     type: object
     properties:
       price:
@@ -3837,7 +3837,7 @@ definitions:
             type: string
           price:
             type: string
-  eurx.pricefeed.QueryParamsResponse:
+  botany.pricefeed.QueryParamsResponse:
     type: object
     properties:
       params:

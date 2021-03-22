@@ -18,7 +18,7 @@ message GenesisState {
     (gogoproto.moretags) = "yaml:\"eurx_accumulation_times\"",
     (gogoproto.nullable) = false
   ];
-  repeated EURXMintingClaim eurx_minting_claims = 3 [
+  repeated EurxMintingClaim eurx_minting_claims = 3 [
     (gogoproto.moretags) = "yaml:\"eurx_minting_claims\"",
     (gogoproto.nullable) = false
   ];

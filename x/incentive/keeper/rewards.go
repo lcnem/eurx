@@ -10,11 +10,11 @@ import (
 	"github.com/lcnem/eurx/x/incentive/types"
 )
 
-// AccumulateEURXMintingRewards updates the rewards accumulated for the input reward period
-func (k Keeper) AccumulateEURXMintingRewards(ctx sdk.Context, rewardPeriod types.RewardPeriod) error {
-	previousAccrualTime, found := k.GetPreviousEURXMintingAccrualTime(ctx, rewardPeriod.CollateralType)
+// AccumulateEurxMintingRewards updates the rewards accumulated for the input reward period
+func (k Keeper) AccumulateEurxMintingRewards(ctx sdk.Context, rewardPeriod types.RewardPeriod) error {
+	previousAccrualTime, found := k.GetPreviousEurxMintingAccrualTime(ctx, rewardPeriod.CollateralType)
 	if !found {
-		k.SetPreviousEURXMintingAccrualTime(ctx, rewardPeriod.CollateralType, ctx.BlockTime())
+		k.SetPreviousEurxMintingAccrualTime(ctx, rewardPeriod.CollateralType, ctx.BlockTime())
 		return nil
 	}
 	timeElapsed := CalculateTimeElapsed(rewardPeriod.Start, rewardPeriod.End, ctx.BlockTime(), previousAccrualTime)
@@ -22,50 +22,50 @@ func (k Keeper) AccumulateEURXMintingRewards(ctx sdk.Context, rewardPeriod types
 		return nil
 	}
 	if rewardPeriod.RewardsPerSecond.Amount.IsZero() {
-		k.SetPreviousEURXMintingAccrualTime(ctx, rewardPeriod.CollateralType, ctx.BlockTime())
+		k.SetPreviousEurxMintingAccrualTime(ctx, rewardPeriod.CollateralType, ctx.BlockTime())
 		return nil
 	}
 	totalPrincipal := k.cdpKeeper.GetTotalPrincipal(ctx, rewardPeriod.CollateralType, types.PrincipalDenom).ToDec()
 	if totalPrincipal.IsZero() {
-		k.SetPreviousEURXMintingAccrualTime(ctx, rewardPeriod.CollateralType, ctx.BlockTime())
+		k.SetPreviousEurxMintingAccrualTime(ctx, rewardPeriod.CollateralType, ctx.BlockTime())
 		return nil
 	}
 	newRewards := timeElapsed.Mul(rewardPeriod.RewardsPerSecond.Amount)
 	cdpFactor, found := k.cdpKeeper.GetInterestFactor(ctx, rewardPeriod.CollateralType)
 	if !found {
-		k.SetPreviousEURXMintingAccrualTime(ctx, rewardPeriod.CollateralType, ctx.BlockTime())
+		k.SetPreviousEurxMintingAccrualTime(ctx, rewardPeriod.CollateralType, ctx.BlockTime())
 		return nil
 	}
 	rewardFactor := newRewards.ToDec().Mul(cdpFactor).Quo(totalPrincipal)
 
-	previousRewardFactor, found := k.GetEURXMintingRewardFactor(ctx, rewardPeriod.CollateralType)
+	previousRewardFactor, found := k.GetEurxMintingRewardFactor(ctx, rewardPeriod.CollateralType)
 	if !found {
 		previousRewardFactor = sdk.ZeroDec()
 	}
 	newRewardFactor := previousRewardFactor.Add(rewardFactor)
-	k.SetEURXMintingRewardFactor(ctx, rewardPeriod.CollateralType, newRewardFactor)
-	k.SetPreviousEURXMintingAccrualTime(ctx, rewardPeriod.CollateralType, ctx.BlockTime())
+	k.SetEurxMintingRewardFactor(ctx, rewardPeriod.CollateralType, newRewardFactor)
+	k.SetPreviousEurxMintingAccrualTime(ctx, rewardPeriod.CollateralType, ctx.BlockTime())
 	return nil
 }
 
-// InitializeEURXMintingClaim creates or updates a claim such that no new rewards are accrued, but any existing rewards are not lost.
+// InitializeEurxMintingClaim creates or updates a claim such that no new rewards are accrued, but any existing rewards are not lost.
 // this function should be called after a cdp is created. If a user previously had a cdp, then closed it, they shouldn't
 // accrue rewards during the period the cdp was closed. By setting the reward factor to the current global reward factor,
 // any unclaimed rewards are preserved, but no new rewards are added.
-func (k Keeper) InitializeEURXMintingClaim(ctx sdk.Context, cdp cdptypes.CDP) {
-	_, found := k.GetEURXMintingRewardPeriod(ctx, cdp.Type)
+func (k Keeper) InitializeEurxMintingClaim(ctx sdk.Context, cdp cdptypes.Cdp) {
+	_, found := k.GetEurxMintingRewardPeriod(ctx, cdp.Type)
 	if !found {
 		// this collateral type is not incentivized, do nothing
 		return
 	}
-	rewardFactor, found := k.GetEURXMintingRewardFactor(ctx, cdp.Type)
+	rewardFactor, found := k.GetEurxMintingRewardFactor(ctx, cdp.Type)
 	if !found {
 		rewardFactor = sdk.ZeroDec()
 	}
-	claim, found := k.GetEURXMintingClaim(ctx, cdp.Owner.AccAddress())
+	claim, found := k.GetEurxMintingClaim(ctx, cdp.Owner.AccAddress())
 	if !found { // this is the owner's first eurx minting reward claim
-		claim = types.NewEURXMintingClaim(cdp.Owner.AccAddress(), sdk.NewCoin(types.EURXMintingRewardDenom, sdk.ZeroInt()), types.RewardIndexes{types.NewRewardIndex(cdp.Type, rewardFactor)})
-		k.SetEURXMintingClaim(ctx, claim)
+		claim = types.NewEurxMintingClaim(cdp.Owner.AccAddress(), sdk.NewCoin(types.EurxMintingRewardDenom, sdk.ZeroInt()), types.RewardIndexes{types.NewRewardIndex(cdp.Type, rewardFactor)})
+		k.SetEurxMintingClaim(ctx, claim)
 		return
 	}
 	// the owner has an existing eurx minting reward claim
@@ -75,26 +75,26 @@ func (k Keeper) InitializeEURXMintingClaim(ctx sdk.Context, cdp cdptypes.CDP) {
 	} else { // the owner has a previous eurx minting reward for this collateral type
 		claim.RewardIndexes[index] = types.NewRewardIndex(cdp.Type, rewardFactor)
 	}
-	k.SetEURXMintingClaim(ctx, claim)
+	k.SetEurxMintingClaim(ctx, claim)
 }
 
-// SynchronizeEURXMintingReward updates the claim object by adding any accumulated rewards and updating the reward index value.
+// SynchronizeEurxMintingReward updates the claim object by adding any accumulated rewards and updating the reward index value.
 // this should be called before a cdp is modified, immediately after the 'SynchronizeInterest' method is called in the cdp module
-func (k Keeper) SynchronizeEURXMintingReward(ctx sdk.Context, cdp cdptypes.CDP) {
-	_, found := k.GetEURXMintingRewardPeriod(ctx, cdp.Type)
+func (k Keeper) SynchronizeEurxMintingReward(ctx sdk.Context, cdp cdptypes.Cdp) {
+	_, found := k.GetEurxMintingRewardPeriod(ctx, cdp.Type)
 	if !found {
 		// this collateral type is not incentivized, do nothing
 		return
 	}
 
-	globalRewardFactor, found := k.GetEURXMintingRewardFactor(ctx, cdp.Type)
+	globalRewardFactor, found := k.GetEurxMintingRewardFactor(ctx, cdp.Type)
 	if !found {
 		globalRewardFactor = sdk.ZeroDec()
 	}
-	claim, found := k.GetEURXMintingClaim(ctx, cdp.Owner.AccAddress())
+	claim, found := k.GetEurxMintingClaim(ctx, cdp.Owner.AccAddress())
 	if !found {
-		claim = types.NewEURXMintingClaim(cdp.Owner.AccAddress(), sdk.NewCoin(types.EURXMintingRewardDenom, sdk.ZeroInt()), types.RewardIndexes{types.NewRewardIndex(cdp.Type, globalRewardFactor)})
-		k.SetEURXMintingClaim(ctx, claim)
+		claim = types.NewEurxMintingClaim(cdp.Owner.AccAddress(), sdk.NewCoin(types.EurxMintingRewardDenom, sdk.ZeroInt()), types.RewardIndexes{types.NewRewardIndex(cdp.Type, globalRewardFactor)})
+		k.SetEurxMintingClaim(ctx, claim)
 		return
 	}
 
@@ -102,7 +102,7 @@ func (k Keeper) SynchronizeEURXMintingReward(ctx sdk.Context, cdp cdptypes.CDP) 
 	index, hasRewardIndex := claim.HasRewardIndex(cdp.Type)
 	if !hasRewardIndex { // this is the owner's first eurx minting reward for this collateral type
 		claim.RewardIndexes = append(claim.RewardIndexes, types.NewRewardIndex(cdp.Type, globalRewardFactor))
-		k.SetEURXMintingClaim(ctx, claim)
+		k.SetEurxMintingClaim(ctx, claim)
 		return
 	}
 	userRewardFactor := claim.RewardIndexes[index].RewardFactor
@@ -113,25 +113,25 @@ func (k Keeper) SynchronizeEURXMintingReward(ctx sdk.Context, cdp cdptypes.CDP) 
 	claim.RewardIndexes[index].RewardFactor = globalRewardFactor
 	newRewardsAmount := rewardsAccumulatedFactor.Mul(cdp.GetTotalPrincipal().Amount.ToDec()).RoundInt()
 	if newRewardsAmount.IsZero() {
-		k.SetEURXMintingClaim(ctx, claim)
+		k.SetEurxMintingClaim(ctx, claim)
 		return
 	}
-	newRewardsCoin := sdk.NewCoin(types.EURXMintingRewardDenom, newRewardsAmount)
+	newRewardsCoin := sdk.NewCoin(types.EurxMintingRewardDenom, newRewardsAmount)
 	claim.Reward = claim.Reward.Add(newRewardsCoin)
-	k.SetEURXMintingClaim(ctx, claim)
+	k.SetEurxMintingClaim(ctx, claim)
 	return
 }
 
-// ZeroEURXMintingClaim zeroes out the claim object's rewards and returns the updated claim object
-func (k Keeper) ZeroEURXMintingClaim(ctx sdk.Context, claim types.EURXMintingClaim) types.EURXMintingClaim {
+// ZeroEurxMintingClaim zeroes out the claim object's rewards and returns the updated claim object
+func (k Keeper) ZeroEurxMintingClaim(ctx sdk.Context, claim types.EurxMintingClaim) types.EurxMintingClaim {
 	claim.Reward = sdk.NewCoin(claim.Reward.Denom, sdk.ZeroInt())
-	k.SetEURXMintingClaim(ctx, claim)
+	k.SetEurxMintingClaim(ctx, claim)
 	return claim
 }
 
-// SynchronizeEURXMintingClaim updates the claim object by adding any rewards that have accumulated.
+// SynchronizeEurxMintingClaim updates the claim object by adding any rewards that have accumulated.
 // Returns the updated claim object
-func (k Keeper) SynchronizeEURXMintingClaim(ctx sdk.Context, claim types.EURXMintingClaim) (types.EURXMintingClaim, error) {
+func (k Keeper) SynchronizeEurxMintingClaim(ctx sdk.Context, claim types.EurxMintingClaim) (types.EurxMintingClaim, error) {
 	for _, ri := range claim.RewardIndexes {
 		cdp, found := k.cdpKeeper.GetCdpByOwnerAndCollateralType(ctx, claim.Owner.AccAddress(), ri.CollateralType)
 		if !found {
@@ -144,9 +144,9 @@ func (k Keeper) SynchronizeEURXMintingClaim(ctx sdk.Context, claim types.EURXMin
 }
 
 // this function assumes a claim already exists, so don't call it if that's not the case
-func (k Keeper) synchronizeRewardAndReturnClaim(ctx sdk.Context, cdp cdptypes.CDP) types.EURXMintingClaim {
-	k.SynchronizeEURXMintingReward(ctx, cdp)
-	claim, _ := k.GetEURXMintingClaim(ctx, cdp.Owner.AccAddress())
+func (k Keeper) synchronizeRewardAndReturnClaim(ctx sdk.Context, cdp cdptypes.Cdp) types.EurxMintingClaim {
+	k.SynchronizeEurxMintingReward(ctx, cdp)
+	claim, _ := k.GetEurxMintingClaim(ctx, cdp.Owner.AccAddress())
 	return claim
 }
 
@@ -173,15 +173,15 @@ func CalculateTimeElapsed(start, end, blockTime time.Time, previousAccrualTime t
 	))))
 }
 
-// SimulateEURXMintingSynchronization calculates a user's outstanding EURX minting rewards by simulating reward synchronization
-func (k Keeper) SimulateEURXMintingSynchronization(ctx sdk.Context, claim types.EURXMintingClaim) types.EURXMintingClaim {
+// SimulateEurxMintingSynchronization calculates a user's outstanding Eurx minting rewards by simulating reward synchronization
+func (k Keeper) SimulateEurxMintingSynchronization(ctx sdk.Context, claim types.EurxMintingClaim) types.EurxMintingClaim {
 	for _, ri := range claim.RewardIndexes {
-		_, found := k.GetEURXMintingRewardPeriod(ctx, ri.CollateralType)
+		_, found := k.GetEurxMintingRewardPeriod(ctx, ri.CollateralType)
 		if !found {
 			continue
 		}
 
-		globalRewardFactor, found := k.GetEURXMintingRewardFactor(ctx, ri.CollateralType)
+		globalRewardFactor, found := k.GetEurxMintingRewardFactor(ctx, ri.CollateralType)
 		if !found {
 			globalRewardFactor = sdk.ZeroDec()
 		}
@@ -207,7 +207,7 @@ func (k Keeper) SimulateEURXMintingSynchronization(ctx sdk.Context, claim types.
 		if newRewardsAmount.IsZero() {
 			continue
 		}
-		newRewardsCoin := sdk.NewCoin(types.EURXMintingRewardDenom, newRewardsAmount)
+		newRewardsCoin := sdk.NewCoin(types.EurxMintingRewardDenom, newRewardsAmount)
 		claim.Reward = claim.Reward.Add(newRewardsCoin)
 	}
 

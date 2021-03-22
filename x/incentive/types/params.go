@@ -24,14 +24,14 @@ const (
 
 // Parameter keys and default values
 var (
-	KeyEURXMintingRewardPeriods     = []byte("EURXMintingRewardPeriods")
+	KeyEurxMintingRewardPeriods     = []byte("EurxMintingRewardPeriods")
 	KeyClaimEnd                     = []byte("ClaimEnd")
 	KeyMultipliers                  = []byte("ClaimMultipliers")
 	DefaultActive                   = false
 	DefaultRewardPeriods            = RewardPeriods{}
 	DefaultMultiRewardPeriods       = MultiRewardPeriods{}
 	DefaultMultipliers              = Multipliers{}
-	DefaultEURXClaims               = EURXMintingClaims{}
+	DefaultEurxClaims               = EurxMintingClaims{}
 	DefaultGenesisAccumulationTimes = GenesisAccumulationTimes{}
 	DefaultClaimEnd                 = tmtime.Canonical(time.Unix(1, 0))
 	GovDenom                        = cdptypes.DefaultGovDenom
@@ -63,7 +63,7 @@ func ParamKeyTable() paramstype.KeyTable {
 // ParamSetPairs implements the ParamSet interface and returns all the key/value pairs
 func (p *Params) ParamSetPairs() paramstype.ParamSetPairs {
 	return paramstype.ParamSetPairs{
-		paramstype.NewParamSetPair(KeyEURXMintingRewardPeriods, &p.EurxMintingRewardPeriods, validateRewardPeriodsParam),
+		paramstype.NewParamSetPair(KeyEurxMintingRewardPeriods, &p.EurxMintingRewardPeriods, validateRewardPeriodsParam),
 		paramstype.NewParamSetPair(KeyClaimEnd, &p.ClaimEnd, validateClaimEndParam),
 		paramstype.NewParamSetPair(KeyMultipliers, &p.ClaimMultipliers, validateMultipliersParam),
 	}

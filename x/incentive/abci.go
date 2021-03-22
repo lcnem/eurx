@@ -10,7 +10,7 @@ import (
 func BeginBlocker(ctx sdk.Context, k keeper.Keeper) {
 	params := k.GetParams(ctx)
 	for _, rp := range params.EurxMintingRewardPeriods {
-		err := k.AccumulateEURXMintingRewards(ctx, rp)
+		err := k.AccumulateEurxMintingRewards(ctx, rp)
 		if err != nil {
 			panic(err)
 		}

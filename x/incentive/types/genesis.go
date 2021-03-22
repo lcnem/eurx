@@ -17,7 +17,7 @@ func DefaultGenesis() *GenesisState {
 	return &GenesisState{
 		Params:                params,
 		EurxAccumulationTimes: GenesisAccumulationTimes{},
-		EurxMintingClaims:     DefaultEURXClaims,
+		EurxMintingClaims:     DefaultEurxClaims,
 		// this line is used by starport scaffolding # genesis/types/default
 	}
 }
@@ -35,11 +35,11 @@ func (gs GenesisState) Validate() error {
 		return err
 	}
 
-	return EURXMintingClaims(gs.EurxMintingClaims).Validate()
+	return EurxMintingClaims(gs.EurxMintingClaims).Validate()
 }
 
 // NewGenesisState returns a new genesis state
-func NewGenesisState(params Params, eurxAccumTimes GenesisAccumulationTimes, c EURXMintingClaims) GenesisState {
+func NewGenesisState(params Params, eurxAccumTimes GenesisAccumulationTimes, c EurxMintingClaims) GenesisState {
 	return GenesisState{
 		Params:                params,
 		EurxAccumulationTimes: eurxAccumTimes,

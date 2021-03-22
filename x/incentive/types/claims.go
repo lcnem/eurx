@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	EURXMintingClaimType = "eurx_minting"
+	EurxMintingClaimType = "eurx_minting"
 	BondDenom            = "uestm"
 )
 
@@ -54,9 +54,9 @@ func (c BaseMultiClaim) Validate() error {
 
 // -------------- Custom Claim Types --------------
 
-// NewEURXMintingClaim returns a new EURXMintingClaim
-func NewEURXMintingClaim(owner sdk.AccAddress, reward sdk.Coin, rewardIndexes RewardIndexes) EURXMintingClaim {
-	return EURXMintingClaim{
+// NewEurxMintingClaim returns a new EurxMintingClaim
+func NewEurxMintingClaim(owner sdk.AccAddress, reward sdk.Coin, rewardIndexes RewardIndexes) EurxMintingClaim {
+	return EurxMintingClaim{
 		BaseClaim: &BaseClaim{
 			Owner:  owner.Bytes(),
 			Reward: reward,
@@ -66,18 +66,18 @@ func NewEURXMintingClaim(owner sdk.AccAddress, reward sdk.Coin, rewardIndexes Re
 }
 
 // GetType returns the claim's type
-func (c EURXMintingClaim) GetType() string { return EURXMintingClaimType }
+func (c EurxMintingClaim) GetType() string { return EurxMintingClaimType }
 
 // GetReward returns the claim's reward coin
-func (c EURXMintingClaim) GetReward() sdk.Coin { return c.Reward }
+func (c EurxMintingClaim) GetReward() sdk.Coin { return c.Reward }
 
 // GetOwner returns the claim's owner
-func (c EURXMintingClaim) GetOwner() sdk.AccAddress {
+func (c EurxMintingClaim) GetOwner() sdk.AccAddress {
 	return c.Owner.AccAddress()
 }
 
 // Validate performs a basic check of a Claim fields
-func (c EURXMintingClaim) Validate() error {
+func (c EurxMintingClaim) Validate() error {
 	if err := RewardIndexes(c.RewardIndexes).Validate(); err != nil {
 		return err
 	}
@@ -86,7 +86,7 @@ func (c EURXMintingClaim) Validate() error {
 }
 
 // HasRewardIndex check if a claim has a reward index for the input collateral type
-func (c EURXMintingClaim) HasRewardIndex(collateralType string) (int64, bool) {
+func (c EurxMintingClaim) HasRewardIndex(collateralType string) (int64, bool) {
 	for index, ri := range c.RewardIndexes {
 		if ri.CollateralType == collateralType {
 			return int64(index), true
@@ -95,12 +95,12 @@ func (c EURXMintingClaim) HasRewardIndex(collateralType string) (int64, bool) {
 	return 0, false
 }
 
-// EURXMintingClaims slice of EURXMintingClaim
-type EURXMintingClaims []EURXMintingClaim
+// EurxMintingClaims slice of EurxMintingClaim
+type EurxMintingClaims []EurxMintingClaim
 
 // Validate checks if all the claims are valid and there are no duplicated
 // entries.
-func (cs EURXMintingClaims) Validate() error {
+func (cs EurxMintingClaims) Validate() error {
 	for _, c := range cs {
 		if err := c.Validate(); err != nil {
 			return err

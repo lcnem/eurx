@@ -24,11 +24,11 @@ func KeyPrefix(p string) []byte {
 const (
 	ParamsKey = "Params-value-"
 
-	EURXMintingRewardDenom = "uestm"
+	EurxMintingRewardDenom = "uestm"
 )
 
 var (
-	EURXMintingClaimKeyPrefix                     = []byte{0x01} // prefix for keys that store EURX minting claims
-	EURXMintingRewardFactorKeyPrefix              = []byte{0x02} // prefix for key that stores EURX minting reward factors
-	PreviousEURXMintingRewardAccrualTimeKeyPrefix = []byte{0x03} // prefix for key that stores the blocktime
+	EurxMintingClaimKeyPrefix                     = []byte{0x01} // prefix for keys that store Eurx minting claims
+	EurxMintingRewardFactorKeyPrefix              = []byte{0x02} // prefix for key that stores Eurx minting reward factors
+	PreviousEurxMintingRewardAccrualTimeKeyPrefix = []byte{0x03} // prefix for key that stores the blocktime
 )

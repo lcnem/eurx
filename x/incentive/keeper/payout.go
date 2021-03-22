@@ -20,9 +20,9 @@ const (
 	PaymentHour = 14
 )
 
-// ClaimEURXMintingReward sends the reward amount to the input address and zero's out the claim in the store
-func (k Keeper) ClaimEURXMintingReward(ctx sdk.Context, addr sdk.AccAddress, multiplierName string) error {
-	claim, found := k.GetEURXMintingClaim(ctx, addr)
+// ClaimEurxMintingReward sends the reward amount to the input address and zero's out the claim in the store
+func (k Keeper) ClaimEurxMintingReward(ctx sdk.Context, addr sdk.AccAddress, multiplierName string) error {
+	claim, found := k.GetEurxMintingClaim(ctx, addr)
 	if !found {
 		return sdkerrors.Wrapf(types.ErrClaimNotFound, "address: %s", addr)
 	}
@@ -38,7 +38,7 @@ func (k Keeper) ClaimEURXMintingReward(ctx sdk.Context, addr sdk.AccAddress, mul
 		return sdkerrors.Wrapf(types.ErrClaimExpired, "block time %s > claim end time %s", ctx.BlockTime(), claimEnd)
 	}
 
-	claim, err := k.SynchronizeEURXMintingClaim(ctx, claim)
+	claim, err := k.SynchronizeEurxMintingClaim(ctx, claim)
 	if err != nil {
 		return err
 	}
@@ -58,7 +58,7 @@ func (k Keeper) ClaimEURXMintingReward(ctx sdk.Context, addr sdk.AccAddress, mul
 		return err
 	}
 
-	k.ZeroEURXMintingClaim(ctx, claim)
+	k.ZeroEurxMintingClaim(ctx, claim)
 
 	ctx.EventManager().EmitEvent(
 		sdk.NewEvent(

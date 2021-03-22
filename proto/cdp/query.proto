@@ -1,5 +1,5 @@
 syntax = "proto3";
-package eurx.cdp;
+package botany.cdp;
 
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
@@ -11,14 +11,14 @@ option go_package = "github.com/lcnem/eurx/x/cdp/types";
 // Query defines the gRPC querier service.
 service Query {
 	rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
-		option (google.api.http).get = "/eurx/cdp/params";
+		option (google.api.http).get = "/botany/cdp/params";
 	}
   // this line is used by starport scaffolding # 2
 	rpc Cdp(QueryGetCdpRequest) returns (QueryGetCdpResponse) {
-		option (google.api.http).get = "/eurx/cdp/cdps/{id}";
+		option (google.api.http).get = "/botany/cdp/cdps/{id}";
 	}
 	rpc CdpAll(QueryAllCdpRequest) returns (QueryAllCdpResponse) {
-		option (google.api.http).get = "/eurx/cdp/cdps";
+		option (google.api.http).get = "/botany/cdp/cdps";
 	}
 }
 
@@ -35,7 +35,7 @@ message QueryGetCdpRequest {
 }
 
 message QueryGetCdpResponse {
-	CDP Cdp = 1;
+	Cdp cdp = 1;
 }
 
 message QueryAllCdpRequest {
@@ -43,6 +43,6 @@ message QueryAllCdpRequest {
 }
 
 message QueryAllCdpResponse {
-	repeated CDP Cdp = 1;
+	repeated Cdp cdp = 1;
 	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
