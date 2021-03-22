@@ -3,7 +3,7 @@ version: "3"
 services:
   eurxd:
     container_name: eurxd
-    image: lcnem/eurx:next
+    image: lcnem/eurx
     # ports:
     #   - 1317:1317
     #   - 9090:9090
