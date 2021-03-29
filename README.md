@@ -24,7 +24,7 @@ sudo systemctl restart docker
 ```bash
 git clone https://github.com/lcnem/eurx.git
 cd eurx
-docker run -v ~/.eurx:/root/.eurx lcnem/eurx [moniker] --chain-id [chain-id]
+docker run -v ~/.eurx:/root/.eurx lcnem/eurx init [moniker] --chain-id [chain-id]
 cp launch/[chain-id]/genesis.json ~/.eurx/config/genesis.json
 docker-compose up -d
 ```
