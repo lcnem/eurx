@@ -11,10 +11,6 @@ services:
     #   - 26657:26657
     volumes:
       - ~/.eurx:/root/.eurx
-    command: eurxd start \
-      --rpc.laddr=tcp://0.0.0.0:26657 \
-      --api.enable=true \
-      --api.address=tcp://0.0.0.0:1317 \
-      --api.enabled-unsafe-cors=true
+    command: eurxd start
     network_mode: host
     restart: always
