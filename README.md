@@ -22,10 +22,11 @@ sudo systemctl restart docker
 ### Join network
 
 ```bash
-git clone https://github.com/lcnem/eurx.git
+docker run -v ~/.eurx:/root/.eurx lcnem/eurx eurxd init [moniker] --chain-id [chain-id]
+mkdir eurx
 cd eurx
-docker run -v ~/.eurx:/root/.eurx lcnem/eurx init [moniker] --chain-id [chain-id]
-cp launch/[chain-id]/genesis.json ~/.eurx/config/genesis.json
+curl -L https://raw.githubusercontent.com/lcnem/eurx/main/launch/[chain-id]/genesis.json > ~/.eurx/config/genesis.json
+curl -O https://raw.githubusercontent.com/lcnem/eurx/main/docker-compose.yml
 docker-compose up -d
 ```
 
