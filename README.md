@@ -25,7 +25,7 @@ sudo systemctl restart docker
 docker run -v ~/.eurx:/root/.eurx lcnem/eurx eurxd init [moniker] --chain-id [chain-id]
 mkdir eurx
 cd eurx
-curl -L https://raw.githubusercontent.com/lcnem/eurx/main/launch/[chain-id]/genesis.json > ~/.eurx/config/genesis.json
+curl -L https://raw.githubusercontent.com/lcnem/eurx/main/launch/[chain-id]/genesis.json -o ~/.eurx/config/genesis.json
 curl -O https://raw.githubusercontent.com/lcnem/eurx/main/docker-compose.yml
 docker-compose up -d
 ```
